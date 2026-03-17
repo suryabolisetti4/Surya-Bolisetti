@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user profile information and preferences.",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string", "description": "Unique username chosen by the user." },
+        "displayName": { "type": "string", "description": "User's display name." },
+        "photoURL": { "type": "string", "description": "URL to the user's profile picture." },
+        "preferences": {
+          "type": "object",
+          "description": "User application preferences.",
+          "properties": {
+            "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+            "notifications": { "type": "boolean" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "displayName", "createdAt"]
+    },
+    "Username": {
+      "title": "Username Mapping",
+      "description": "Used to enforce username uniqueness.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The UID of the user who owns this username." }
+      },
+      "required": ["uid"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Private user profile data."
+    },
+    "usernames/{username}": {
+      "schema": "Username",
+      "description": "Public mapping of usernames to UIDs for uniqueness checks."
+    }
+  }
+}
