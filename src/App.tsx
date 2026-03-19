@@ -1072,6 +1072,7 @@ function AppContent() {
   const [projects, setProjects] = useState<Project[]>(PROJECTS);
   const [generatingProjectId, setGeneratingProjectId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activePaperImages, setActivePaperImages] = useState<string[] | null>(null);
 
   const handleGenerateImage = async (id: string, title: string) => {
     setGeneratingProjectId(id);
@@ -1855,41 +1856,65 @@ function AppContent() {
                   </p>
                 </div>
               </div>
-
-              {/* Research Gallery Preview */}
-              {paper.images && (
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                    {paper.images.map((img, idx) => (
-                        <motion.div 
-                          key={idx}
-                          whileHover={{ scale: 1.02, y: -5 }}
-                          className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/5 bg-black/20 group/img cursor-pointer"
-                        >
-                            <img 
-                              src={img} 
-                              alt={`Research Page ${idx + 1}`} 
-                              className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500" 
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-4">
-                                <span className="text-[10px] font-mono text-accent-primary uppercase tracking-widest">Page {idx + 1} Preview</span>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-              )}
-              <a 
-                href={paper.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <button 
+                onClick={() => paper.images && setActivePaperImages(paper.images)}
                 className="btn-outline h-10 w-fit flex items-center gap-2"
               >
                 Read Paper <ExternalLink size={14} />
-              </a>
+              </button>
             </motion.div>
           ))}
         </div>
 
+        {/* Paper Viewer Modal */}
+        <AnimatePresence>
+          {activePaperImages && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[6000] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
+            >
+              <div className="w-full h-full max-w-5xl relative flex flex-col items-center">
+                <button
+                  onClick={() => setActivePaperImages(null)}
+                  className="absolute top-4 right-4 p-3 rounded-full bg-white/10 text-white hover:bg-accent-primary transition-all z-[7000] border border-white/10 group"
+                >
+                  <X size={24} className="group-hover:rotate-90 transition-transform" />
+                </button>
 
+                <div className="w-full h-full overflow-y-auto custom-scrollbar flex flex-col items-center gap-8 py-12 px-4 scroll-smooth">
+                   {activePaperImages.map((img, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="w-full max-w-3xl rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] bg-bg-elevated"
+                      >
+                          <img 
+                            src={img} 
+                            alt={`Paper Page ${idx + 1}`} 
+                            className="w-full h-auto block"
+                          />
+                      </motion.div>
+                   ))}
+                   
+                   <div className="flex gap-4 mb-20">
+                      <a 
+                        href="/research-paper.pdf" 
+                        download 
+                        className="px-8 py-3 bg-accent-primary text-bg-base font-mono font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform flex items-center gap-2"
+                      >
+                        <Download size={18} /> Download Full PDF
+                      </a>
+                   </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
 
