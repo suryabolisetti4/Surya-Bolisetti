@@ -111,6 +111,13 @@ interface Project {
   id: string;
   title: string;
   description: string;
+  detailedDescription: string;
+  details?: {
+    overview: string;
+    features: string[];
+    techStack: string[];
+    applications: string[];
+  };
   imageUrl: string;
   tags: string[];
   githubUrl: string;
@@ -482,6 +489,18 @@ const PROJECTS: Project[] = [
     id: "01",
     title: "Digital Battery Voltage Measurement",
     description: "A precise digital voltmeter system using Arduino and LCD to monitor battery health and voltage levels in real-time with high accuracy.",
+    detailedDescription: "The Digital Battery Voltage Measurement system is an essential tool for monitoring electrical systems, ensuring battery health, and preventing over-discharge. Designed with an Arduino UNO and high-precision analog-to-digital conversion, it provides real-time feedback through an LCD interface. This system is perfect for DIY power setups, solar energy monitoring, and automotive battery health checks.",
+    details: {
+      overview: "A precise digital voltmeter system using Arduino and LCD to monitor battery health and voltage levels in real-time with high accuracy.",
+      features: [
+        "Real-time voltage monitoring with 0.1V precision",
+        "Visual alerts for low battery levels",
+        "Calibration logic for accurate readings",
+        "Low power consumption design"
+      ],
+      techStack: ["Arduino UNO", "16x2 LCD Display", "Voltage Divider", "Embedded C++"],
+      applications: ["Solar Energy Systems", "Battery Maintenance", "Portable Electronics"]
+    },
     imageUrl: "/project1.png",
     tags: ["Arduino", "ADC", "LCD Display", "Embedded C"],
     githubUrl: "#",
@@ -492,7 +511,19 @@ const PROJECTS: Project[] = [
   {
     id: "02",
     title: "Automatic Exhaust Fan",
-    description: "Smart ventilation system that automatically triggers an exhaust fan based on temperature and humidity thresholds using DHT11 sensors for industrial safety.",
+    description: "Smart ventilation system that automatically triggers an exhaust fan based on temperature and humidity thresholds using DHT11 sensors.",
+    detailedDescription: "The Auto Exhaust Fan is an intelligent safety system designed to prevent gas-related accidents and ensure fresh air circulation. Built around an Arduino UNO and MQ-2 Gas/Smoke sensor, it continuously monitors air quality. Upon detecting hazardous levels of smoke or gas, the system automatically triggers a 5V relay to switch on a high-power exhaust fan, effectively ventilating the space. This solution addresses the risks of human error in manual ventilation control and is ideal for kitchens, workshops, and chemical storage areas.",
+    details: {
+      overview: "An intelligent safety system designed to prevent gas-related accidents and ensure fresh air circulation through automated air quality monitoring.",
+      features: [
+        "Continuous gas/smoke detection (MQ-2)",
+        "Automatic relay-based fan control",
+        "Threshold-based trigger logic",
+        "Emergency visual Indicators"
+      ],
+      techStack: ["Arduino UNO", "MQ-2 Sensor", "5V Relay", "Exhaust Fan"],
+      applications: ["Industrial Kitchens", "Chemical Storage", "Electronic Workshops"]
+    },
     imageUrl: "/project2.png",
     tags: ["Sensors", "Relay Control", "Microcontroller", "Automation"],
     githubUrl: "#",
@@ -503,7 +534,19 @@ const PROJECTS: Project[] = [
   {
     id: "03",
     title: "Automatic Street Lights",
-    description: "Energy-efficient lighting system using LDR sensors to automatically control street lights based on ambient light intensity, reducing power wastage.",
+    description: "Energy-efficient lighting system using LDR sensors to automatically control street lights based on ambient light intensity.",
+    detailedDescription: "This smart street lighting solution addresses the growing need for energy conservation in urban environments. Using Light Dependent Resistors (LDR), the system senses ambient light levels and automatically toggles high-efficiency LED lights. By eliminating human intervention and preventing lights from remaining on during daylight hours, it significantly reduces electricity wastage and maintenance costs for municipal infrastructure.",
+    details: {
+      overview: "Energy-efficient lighting system using LDR sensors to automatically control street lights based on ambient light intensity, reducing power wastage.",
+      features: [
+        "Ambient light sensitivity adjustment",
+        "Automatic day/night switching",
+        "Energy surge protection",
+        "Scalable network architecture"
+      ],
+      techStack: ["LDR Sensor", "Microcontroller", "LED Array", "Power Regulation"],
+      applications: ["Urban Street Lighting", "Campus Safety", "Residential Driveways"]
+    },
     imageUrl: "/project3.png",
     tags: ["LDR", "Power Management", "Energy Saving", "Electronics"],
     githubUrl: "#",
@@ -514,7 +557,19 @@ const PROJECTS: Project[] = [
   {
     id: "04",
     title: "Regenerative Braking System",
-    description: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy for battery storage. Achieved an energy recovery efficiency of 40% – 65% in experimental testing.",
+    description: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy.",
+    detailedDescription: "The Regenerative Braking System prototype showcases the future of sustainable transportation. In a standard electric vehicle, braking energy is typically lost as heat. This system reverses the motor's role during deceleration, turning it into a generator that feeds energy back into the battery. Experimental testing achieved an energy recovery efficiency of 40% – 65%, proving it as a critical component for extending EV range and improving overall energy efficiency.",
+    details: {
+      overview: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy for battery storage.",
+      features: [
+        "Efficient energy conversion (Motor-to-Generator)",
+        "High-efficiency storage interface",
+        "Dynamic braking feedback system",
+        "Real-time efficiency monitoring"
+      ],
+      techStack: ["Brushless DC Motor", "Supercapacitors", "Power Converter", "Arduino Controller"],
+      applications: ["Electric Vehicles", "Light Rail Systems", "Electric Bicycles"]
+    },
     imageUrl: "/project4.png",
     tags: ["Electric Vehicles", "Energy Recovery", "Motor Control", "Power Electronics"],
     githubUrl: "#",
@@ -675,7 +730,7 @@ const SkillBar = ({ name, proficiency }: { name: string, proficiency: number, ke
   </div>
 );
 
-const ProjectCard = ({ project, onGenerateImage, isGenerating }: { project: Project, onGenerateImage: (id: string, title: string) => void, isGenerating: boolean, key?: React.Key }) => (
+const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: { project: Project, onViewDetail: (p: Project) => void, onGenerateImage: (id: string, title: string) => void, isGenerating: boolean, key?: React.Key }) => (
   <motion.div 
     layout
     initial={{ opacity: 0, y: 20 }}
@@ -688,7 +743,10 @@ const ProjectCard = ({ project, onGenerateImage, isGenerating }: { project: Proj
     {/* Tech Corner Accent */}
     <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent-primary opacity-40 z-10" />
     
-    <div className="h-52 relative overflow-hidden">
+    <div 
+      className="h-52 relative overflow-hidden cursor-pointer"
+      onClick={() => onViewDetail(project)}
+    >
       <img 
         src={project.imageUrl} 
         alt={project.title}
@@ -708,18 +766,26 @@ const ProjectCard = ({ project, onGenerateImage, isGenerating }: { project: Proj
       
       {/* AI Generate Button Overlay */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-[2px] z-30">
-        <button 
-          onClick={() => onGenerateImage(project.id, project.title)}
-          disabled={isGenerating}
-          className="flex items-center gap-2 px-5 py-2.5 bg-accent-primary text-bg-base rounded-full font-jetbrains text-[10px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
-        >
-          {isGenerating ? (
-            <Loader2 size={14} className="animate-spin" />
-          ) : (
-            <Sparkles size={14} />
-          )}
-          {isGenerating ? 'Synthesizing...' : 'Regenerate AI Asset'}
-        </button>
+        <div className="flex flex-col gap-3">
+          <button 
+            onClick={(e) => { e.stopPropagation(); onViewDetail(project); }}
+            className="flex items-center justify-center gap-2 px-6 py-2.5 bg-white text-black rounded-full font-jetbrains text-[10px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.4)]"
+          >
+            <ExternalLink size={14} /> View Details
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onGenerateImage(project.id, project.title); }}
+            disabled={isGenerating}
+            className="flex items-center gap-2 px-5 py-2.5 bg-accent-primary text-bg-base rounded-full font-jetbrains text-[10px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
+          >
+            {isGenerating ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : (
+              <Sparkles size={14} />
+            )}
+            {isGenerating ? 'Synthesizing...' : 'Regenerate AI'}
+          </button>
+        </div>
       </div>
 
       <div className="absolute top-4 right-4 z-20">
@@ -752,13 +818,153 @@ const ProjectCard = ({ project, onGenerateImage, isGenerating }: { project: Proj
           <a href={project.githubUrl} className="flex items-center gap-2 text-text-muted hover:text-accent-primary transition-colors text-[10px] font-mono uppercase tracking-wider">
             <Github size={14} /> Repository
           </a>
-          {project.liveUrl !== '—' ? (
-            <a href={project.liveUrl} className="flex items-center gap-2 text-accent-secondary hover:brightness-125 transition-all text-[10px] font-mono uppercase tracking-wider">
-              <ExternalLink size={14} /> Live Demo
-            </a>
-          ) : (
-            <span className="text-text-muted/30 text-[10px] font-mono uppercase tracking-wider italic">Internal Project</span>
-          )}
+          <button 
+            onClick={() => onViewDetail(project)}
+            className="flex items-center gap-2 text-accent-secondary hover:brightness-125 transition-all text-[10px] font-mono uppercase tracking-wider"
+          >
+            <ChevronDown size={14} className="-rotate-90" /> Read Case Study
+          </button>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => void }) => (
+  <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="fixed inset-0 z-[5000] bg-bg-base overflow-y-auto"
+  >
+    <div className="min-h-screen relative">
+      {/* Hero Header */}
+      <div className="h-[60vh] relative">
+        <img 
+          src={project.imageUrl} 
+          alt={project.title} 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-base/50 to-bg-base" />
+        
+        <button 
+          onClick={onClose}
+          className="absolute top-8 left-8 p-3 rounded-full bg-black/50 text-white backdrop-blur-md border border-white/10 hover:bg-accent-primary transition-colors flex items-center gap-2 font-mono text-xs uppercase tracking-widest z-50"
+        >
+          <X size={18} /> Close
+        </button>
+
+        <div className="absolute bottom-12 left-0 w-full px-6 md:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <span className="px-3 py-1 bg-accent-primary text-bg-base font-mono text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 inline-block">
+              {project.category}
+            </span>
+            <h1 className="text-4xl md:text-6xl font-syncopate font-bold text-text-primary uppercase mb-4 leading-tight">
+              {project.title}
+            </h1>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-6 md:px-20 py-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-16">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="space-y-12"
+          >
+            <section>
+              <h2 className="text-accent-primary font-mono text-xs uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                <div className="w-8 h-px bg-accent-primary" /> Case Study Overview
+              </h2>
+              <p className="text-xl md:text-2xl text-text-muted font-mono leading-relaxed">
+                {project.detailedDescription}
+              </p>
+            </section>
+
+            {project.details && (
+              <section className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8 border-t border-accent-primary/10">
+                <div>
+                  <h3 className="font-display text-sm text-text-primary uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <Zap size={16} className="text-accent-secondary" /> Core Features
+                  </h3>
+                  <ul className="space-y-4">
+                    {project.details.features.map((f, i) => (
+                      <li key={i} className="flex gap-3 text-text-muted font-mono text-sm leading-relaxed">
+                        <span className="text-accent-primary font-bold">»</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-display text-sm text-text-primary uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <Globe size={16} className="text-accent-primary" /> Key Applications
+                  </h3>
+                  <ul className="space-y-4">
+                    {project.details.applications.map((a, i) => (
+                      <li key={i} className="flex gap-3 text-text-muted font-mono text-sm leading-relaxed">
+                        <span className="text-accent-secondary font-bold">•</span> {a}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            )}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="space-y-12"
+          >
+            <div className="glass-card p-8 border-l-4 border-accent-primary">
+              <h3 className="text-accent-primary font-mono text-[10px] uppercase tracking-[0.3em] mb-6">Technical Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.details?.techStack.map(tech => (
+                  <span key={tech} className="px-3 py-1 bg-accent-primary/5 border border-accent-primary/20 text-accent-primary font-mono text-[10px] rounded uppercase tracking-wider">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <a href={project.githubUrl} className="flex items-center justify-between p-4 bg-bg-elevated border border-accent-primary/20 rounded hover:border-accent-primary transition-all group">
+                <div className="flex items-center gap-4">
+                  <Github size={20} className="text-text-muted group-hover:text-accent-primary" />
+                  <span className="font-mono text-xs uppercase tracking-widest">Source Code</span>
+                </div>
+                <ExternalLink size={14} className="text-text-muted" />
+              </a>
+              <button href={project.liveUrl} className="w-full flex items-center justify-between p-4 bg-bg-elevated border border-accent-secondary/20 rounded hover:border-accent-secondary transition-all group">
+                <div className="flex items-center gap-4">
+                  <ExternalLink size={20} className="text-text-muted group-hover:text-accent-secondary" />
+                  <span className="font-mono text-xs uppercase tracking-widest">Technical Paper</span>
+                </div>
+                <Download size={14} className="text-text-muted" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Navigation Footer */}
+      <div className="mt-20 border-t border-accent-primary/10 py-20 bg-bg-surface/30">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <p className="text-text-muted font-mono text-[10px] uppercase tracking-[0.4em] mb-4">WANT TO SEE MORE?</p>
+          <button 
+            onClick={onClose}
+            className="font-syncopate text-2xl md:text-3xl font-bold text-text-primary hover:text-accent-primary transition-colors uppercase cursor-pointer"
+          >
+            ← BACK TO ALL PROJECTS
+          </button>
         </div>
       </div>
     </div>
@@ -819,6 +1025,7 @@ function AppContent() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>(PROJECTS);
   const [generatingProjectId, setGeneratingProjectId] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const handleGenerateImage = async (id: string, title: string) => {
     setGeneratingProjectId(id);
@@ -1529,6 +1736,7 @@ function AppContent() {
                 <ProjectCard 
                   key={project.id} 
                   project={project} 
+                  onViewDetail={(p) => setSelectedProject(p)}
                   onGenerateImage={handleGenerateImage}
                   isGenerating={generatingProjectId === project.id}
                 />
@@ -1536,6 +1744,16 @@ function AppContent() {
             </AnimatePresence>
           </motion.div>
         </div>
+
+        {/* Project Details Modal/Overlay */}
+        <AnimatePresence>
+          {selectedProject && (
+            <ProjectDetail 
+              project={selectedProject} 
+              onClose={() => setSelectedProject(null)} 
+            />
+          )}
+        </AnimatePresence>
       </section>
 
       {/* --- Research Section --- */}
