@@ -1837,12 +1837,43 @@ function AppContent() {
                   </span>
                 ))}
               </div>
-              <button 
-                onClick={() => setSelectedPaperUrl(paper.url)} 
-                className="btn-outline h-10 w-fit flex items-center gap-2"
-              >
-                Read Full Paper <ExternalLink size={14} />
-              </button>
+
+              {/* Added Technical Highlights */}
+              <div className="mb-8 p-6 bg-bg-elevated/50 rounded-lg border border-accent-primary/5 border-l-2 border-l-accent-secondary">
+                <h4 className="text-accent-primary font-mono text-[10px] uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+                  <Cpu size={14} className="text-accent-secondary" /> Technical Framework & Results
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                  {[
+                    "Energy Efficiency: 40% – 65% recovery achieved",
+                    "Regenerative Mode: BLDC motor variable generator",
+                    "Range Optimization: 10-15% extension in urban cycles",
+                    "Battery Longevity: Reduced thermal stress deceleration",
+                    "Storage Synergy: Supercapacitor buffer integration",
+                    "Braking Logic: Threshold-based control system"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-text-muted font-mono text-[10px] leading-relaxed text-left">
+                      <span className="text-accent-secondary">•</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <button 
+                  onClick={() => setSelectedPaperUrl(paper.url)} 
+                  className="btn-outline h-10 w-fit flex items-center gap-2"
+                >
+                  Read Full Paper <ExternalLink size={14} />
+                </button>
+                <a 
+                  href={paper.url} 
+                  download 
+                  className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-secondary/50 text-accent-secondary hover:bg-accent-secondary/10"
+                >
+                  Download PDF <Download size={14} />
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
