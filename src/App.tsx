@@ -140,6 +140,7 @@ interface Paper {
   keywords: string[];
   venue: string;
   url: string;
+  docsUrl?: string;
 }
 
 interface Certification {
@@ -633,10 +634,11 @@ const EXPERIENCES: Experience[] = [
 const PAPERS: Paper[] = [
   {
     title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs",
-    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%, significantly reducing mechanical brake wear and extending battery life.",
+    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%.",
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
-    venue: "TECHNICAL PAPER PRESENTATION-2K26",
-    url: "/research-paper.pdf"
+    venue: "TECHNICAL PAPER PRESENTATION-2K26 (Integrated Report)",
+    url: "/research-paper.pdf",
+    docsUrl: "/research-paper.docx"
   }
 ];
 
@@ -1859,19 +1861,49 @@ function AppContent() {
                   ))}
                 </div>
               </div>
+
+              {/* Research "Matter" - Content Integrated Directly on the Page */}
+              <div className="mb-8 p-8 bg-black/20 rounded-xl border border-white/5 relative group">
+                <div className="absolute -left-[3px] top-8 bottom-8 w-[3px] bg-gradient-to-b from-accent-primary to-accent-secondary opacity-50 transition-opacity group-hover:opacity-100" />
+                <h4 className="text-accent-secondary font-mono text-[10px] uppercase tracking-[0.4em] mb-6 flex items-center gap-3">
+                  <BookOpen size={14} /> Full Research Matter
+                </h4>
+                <div className="space-y-6 text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-90 transition-opacity group-hover:opacity-100">
+                  <p>
+                    <span className="text-accent-primary font-bold mr-2">// Methodology</span> 
+                    The core objective of this study was to design an efficient energy recovery system for electric vehicles. My methodology involved re-configuring the BLDC motor control logic using an Arduino UNO. By utilizing Pulse Width Modulation (PWM) and MOSFET-based switching, the motor is seamlessly transitioned into a variable generator during braking events.
+                  </p>
+                  <p>
+                    <span className="text-accent-primary font-bold mr-2">// Energy Analysis</span> 
+                    A critical component of the "matter" involves the storage synergy between batteries and supercapacitors. The study analyzed how rapid energy surges—often lost as heat in traditional Braking—can be captured. Experimental data indicates that by using a high-speed buffer, we achieved a conversion efficiency where 40% to 65% of kinetic energy is returned to the storage unit.
+                  </p>
+                  <p>
+                    <span className="text-accent-primary font-bold mr-2">// Conclusion</span> 
+                    This implementation effectively reduces the load on the primary battery, extending the drive range by approximately 10-15% in high-frequency braking environments such as urban city cycles.
+                  </p>
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setSelectedPaperUrl(paper.url)} 
                   className="btn-outline h-10 w-fit flex items-center gap-2"
                 >
-                  Read Full Paper <ExternalLink size={14} />
+                  View PDF <ExternalLink size={14} />
                 </button>
                 <a 
                   href={paper.url} 
                   download 
                   className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-secondary/50 text-accent-secondary hover:bg-accent-secondary/10"
                 >
-                  Download PDF <Download size={14} />
+                  Save PDF <Download size={14} />
+                </a>
+                <a 
+                  href="/research-paper.docx" 
+                  download 
+                  className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-primary/50 text-accent-primary hover:bg-accent-primary/10"
+                >
+                  Get Word DOCX <Download size={14} />
                 </a>
               </div>
             </motion.div>
