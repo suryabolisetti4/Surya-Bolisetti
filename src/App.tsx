@@ -482,7 +482,7 @@ const PROJECTS: Project[] = [
     id: "01",
     title: "Digital Battery Voltage Measurement",
     description: "A precise digital voltmeter system using Arduino and LCD to monitor battery health and voltage levels in real-time with high accuracy.",
-    imageUrl: "https://images.unsplash.com/photo-1590307337484-723472418e76?auto=format&fit=crop&q=80&w=800&h=600",
+    imageUrl: "/project1.png",
     tags: ["Arduino", "ADC", "LCD Display", "Embedded C"],
     githubUrl: "#",
     liveUrl: "—",
@@ -493,7 +493,7 @@ const PROJECTS: Project[] = [
     id: "02",
     title: "Automatic Exhaust Fan",
     description: "Smart ventilation system that automatically triggers an exhaust fan based on temperature and humidity thresholds using DHT11 sensors for industrial safety.",
-    imageUrl: "https://images.unsplash.com/photo-1599708141690-d93d295bb9bd?auto=format&fit=crop&q=80&w=800&h=600",
+    imageUrl: "/project2.png",
     tags: ["Sensors", "Relay Control", "Microcontroller", "Automation"],
     githubUrl: "#",
     liveUrl: "—",
@@ -504,7 +504,7 @@ const PROJECTS: Project[] = [
     id: "03",
     title: "Automatic Street Lights",
     description: "Energy-efficient lighting system using LDR sensors to automatically control street lights based on ambient light intensity, reducing power wastage.",
-    imageUrl: "https://images.unsplash.com/photo-1518005020250-6859b2827c6d?auto=format&fit=crop&q=80&w=800&h=600",
+    imageUrl: "/project3.png",
     tags: ["LDR", "Power Management", "Energy Saving", "Electronics"],
     githubUrl: "#",
     liveUrl: "—",
@@ -515,7 +515,7 @@ const PROJECTS: Project[] = [
     id: "04",
     title: "Regenerative Braking System",
     description: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy for battery storage. Achieved an energy recovery efficiency of 40% – 65% in experimental testing.",
-    imageUrl: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=800&h=600",
+    imageUrl: "/project4.png",
     tags: ["Electric Vehicles", "Energy Recovery", "Motor Control", "Power Electronics"],
     githubUrl: "#",
     liveUrl: "—",
@@ -1359,40 +1359,89 @@ function AppContent() {
       <section id="education" className="section-padding bg-bg-base border-l-[3px] border-accent-secondary">
         <div className="content-max-width">
           <SectionHeader label="// academic.history" heading="Education" />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {EDUCATION.map((edu, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => edu.imageUrl && setSelectedCert(edu.imageUrl)}
-                className={`glass-card p-8 border-t-4 border-accent-primary relative overflow-hidden group ${edu.imageUrl ? 'cursor-pointer hover:border-accent-primary/50' : ''}`}
-              >
-                <div className="absolute -right-4 -top-4 text-accent-primary/5 group-hover:text-accent-primary/10 transition-colors">
-                  <GraduationCap size={120} />
-                </div>
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 text-accent-primary font-mono text-[10px] uppercase tracking-widest mb-4">
-                    <Calendar size={12} />
-                    {edu.period}
+
+          <div className="relative max-w-3xl mx-auto">
+            {/* Vertical Timeline Line */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              style={{ originY: 0 }}
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary via-accent-secondary to-accent-primary/10"
+            />
+
+            {EDUCATION.map((edu, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ delay: i * 0.25, duration: 0.7, ease: "easeOut" }}
+                  className={`relative flex items-center mb-16 last:mb-0 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}
+                >
+                  {/* Card */}
+                  <div
+                    onClick={() => edu.imageUrl && setSelectedCert(edu.imageUrl)}
+                    className={`w-[calc(50%-2rem)] glass-card p-7 border-t-4 border-accent-primary relative overflow-hidden group ${edu.imageUrl ? 'cursor-pointer' : ''} ${isLeft ? 'mr-auto' : 'ml-auto'} hover:shadow-[0_0_30px_rgba(var(--accent-primary-rgb),0.15)] transition-all duration-300`}
+                  >
+                    {/* Background icon */}
+                    <div className="absolute -right-4 -top-4 text-accent-primary/5 group-hover:text-accent-primary/10 transition-colors duration-300">
+                      <GraduationCap size={100} />
+                    </div>
+
+                    {/* Step number badge */}
+                    <div className={`absolute top-4 ${isLeft ? 'right-4' : 'left-4'} w-6 h-6 rounded-full bg-accent-primary/10 border border-accent-primary/30 flex items-center justify-center`}>
+                      <span className="text-accent-primary font-mono text-[9px] font-bold">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-2 text-accent-primary font-mono text-[10px] uppercase tracking-widest mb-3">
+                        <Calendar size={11} />
+                        {edu.period}
+                      </div>
+                      <h3 className="font-display text-lg text-text-primary mb-2 group-hover:text-accent-primary transition-colors duration-300">
+                        {edu.degree}
+                      </h3>
+                      <p className="text-text-muted font-mono text-xs mb-3 leading-relaxed">{edu.institution}</p>
+                      <div className="flex items-center gap-2 text-text-muted font-mono text-[10px] mb-4">
+                        <MapPin size={11} className="text-accent-secondary" />
+                        {edu.location}
+                      </div>
+                      {edu.imageUrl && (
+                        <button className="text-accent-secondary font-mono text-[10px] hover:underline flex items-center gap-1 group/btn">
+                          View Certificate
+                          <ExternalLink size={10} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <h3 className="font-display text-xl text-text-primary mb-2 group-hover:text-accent-primary transition-colors">{edu.degree}</h3>
-                  <p className="text-text-muted font-mono text-sm mb-4 leading-relaxed">{edu.institution}</p>
-                  <div className="flex items-center gap-2 text-text-muted font-mono text-[11px] mb-6">
-                    <MapPin size={12} className="text-accent-secondary" />
-                    {edu.location}
+
+                  {/* Timeline Node */}
+                  <div className="absolute left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.25 + 0.3, duration: 0.4, type: "spring" }}
+                      className="w-5 h-5 rounded-full bg-accent-primary shadow-[0_0_16px_rgba(var(--accent-primary-rgb),0.7)] border-4 border-bg-base"
+                    />
                   </div>
-                  {edu.imageUrl && (
-                    <button className="text-accent-secondary font-mono text-[10px] hover:underline flex items-center gap-1">
-                      View Certificate <ExternalLink size={10} />
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+
+                  {/* Connector line from node to card */}
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.25 + 0.4, duration: 0.3 }}
+                    style={{ originX: isLeft ? 1 : 0 }}
+                    className={`absolute top-1/2 -translate-y-1/2 w-8 h-px bg-accent-primary/50 ${isLeft ? 'right-[calc(50%-2.5rem)]' : 'left-[calc(50%-2.5rem)]'}`}
+                  />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
