@@ -573,7 +573,7 @@ const PROJECTS: Project[] = [
     imageUrl: "/project4.png",
     tags: ["Electric Vehicles", "Energy Recovery", "Motor Control", "Power Electronics"],
     githubUrl: "#",
-    liveUrl: "—",
+    liveUrl: "/research-paper.pdf",
     status: "In Progress",
     category: "Green Tech"
   }
@@ -635,7 +635,7 @@ const PAPERS: Paper[] = [
     abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%, significantly reducing mechanical brake wear and extending battery life.",
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
     venue: "TECHNICAL PAPER PRESENTATION-2K26",
-    url: "#"
+    url: "/research-paper.pdf"
   }
 ];
 
@@ -943,13 +943,19 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
                 </div>
                 <ExternalLink size={14} className="text-text-muted" />
               </a>
-              <button href={project.liveUrl} className="w-full flex items-center justify-between p-4 bg-bg-elevated border border-accent-secondary/20 rounded hover:border-accent-secondary transition-all group">
+              <a 
+                href={project.liveUrl !== '—' ? project.liveUrl : '#'} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                disabled={project.liveUrl === '—'}
+                className={`w-full flex items-center justify-between p-4 bg-bg-elevated border border-accent-secondary/20 rounded hover:border-accent-secondary transition-all group ${project.liveUrl === '—' ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
                 <div className="flex items-center gap-4">
                   <ExternalLink size={20} className="text-text-muted group-hover:text-accent-secondary" />
                   <span className="font-mono text-xs uppercase tracking-widest">Technical Paper</span>
                 </div>
                 <Download size={14} className="text-text-muted" />
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -1791,8 +1797,13 @@ function AppContent() {
                   </span>
                 ))}
               </div>
-              <a href={paper.url} className="btn-outline h-10 w-fit">
-                Read Paper <ArrowUp className="rotate-45" size={14} />
+              <a 
+                href={paper.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-outline h-10 w-fit flex items-center gap-2"
+              >
+                Read Paper <ExternalLink size={14} />
               </a>
             </motion.div>
           ))}
