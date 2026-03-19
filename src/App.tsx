@@ -962,7 +962,7 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
         </div>
 
         {/* Embedded PDF Viewer */}
-        {project.liveUrl.endsWith('.pdf') && (
+        {project.liveUrl.toLowerCase().endsWith('.pdf') && (
           <motion.section 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -973,11 +973,18 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
               <div className="w-8 h-px bg-accent-primary" /> Full Research Paper
             </h2>
             <div className="w-full h-[800px] bg-bg-elevated rounded-xl border border-white/5 overflow-hidden relative group">
-              <iframe 
-                src={`${project.liveUrl}#toolbar=0`} 
+              <object 
+                data={`${project.liveUrl}#toolbar=0`} 
+                type="application/pdf"
                 className="w-full h-full border-none"
                 title={`${project.title} Paper`}
-              />
+              >
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                  <AlertCircle size={48} className="text-accent-primary mb-4" />
+                  <p className="text-text-primary font-display text-lg mb-4">PDF Viewer unavailable in your browser</p>
+                  <a href={project.liveUrl} className="btn-primary">Download to View Offline</a>
+                </div>
+              </object>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <a 
                   href={project.liveUrl} 
@@ -1852,15 +1859,29 @@ function AppContent() {
               <div className="w-full h-full max-w-6xl bg-bg-base rounded-2xl border border-white/10 overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                 <button 
                   onClick={() => setSelectedPaperUrl(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full bg-black/50 text-white border border-white/10 hover:bg-accent-primary transition-colors z-50 group"
+                  className="absolute top-6 right-6 p-2 rounded-full bg-black/50 text-white border border-white/10 hover:bg-accent-primary transition-colors z-[7000] group"
                 >
                   <X size={20} className="group-hover:rotate-90 transition-transform" />
                 </button>
-                <iframe 
-                  src={`${selectedPaperUrl}`} 
+                <object 
+                  data={`${selectedPaperUrl}`} 
+                  type="application/pdf"
                   className="w-full h-full border-none"
                   title="PDF Viewer"
-                />
+                >
+                  <div className="w-full h-full flex flex-col items-center justify-center p-12 text-center">
+                    <AlertCircle size={64} className="text-accent-primary mb-6 animate-pulse" />
+                    <h2 className="text-2xl font-display text-text-primary mb-4">Embedded Viewer Unsupported</h2>
+                    <p className="text-text-muted font-mono mb-8 max-w-md">Your browser current security settings or capabilities are preventing the PDF from being shown here.</p>
+                    <a 
+                      href={selectedPaperUrl} 
+                      className="px-8 py-3 bg-accent-primary text-bg-base font-mono font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
+                      download
+                    >
+                      Download PDF to View
+                    </a>
+                  </div>
+                </object>
               </div>
             </motion.div>
           )}
