@@ -1891,12 +1891,12 @@ function AppContent() {
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="w-full max-w-3xl rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] bg-bg-elevated"
+                        className="w-full max-w-5xl rounded-sm overflow-hidden border border-white/5 shadow-2xl bg-white"
                       >
                           <img 
                             src={img} 
                             alt={`Paper Page ${idx + 1}`} 
-                            className="w-full h-auto block"
+                            className="w-full h-auto block object-contain"
                           />
                       </motion.div>
                    ))}
