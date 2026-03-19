@@ -1070,7 +1070,6 @@ function AppContent() {
   const [projects, setProjects] = useState<Project[]>(PROJECTS);
   const [generatingProjectId, setGeneratingProjectId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [selectedPaperUrl, setSelectedPaperUrl] = useState<string | null>(null);
 
   const handleGenerateImage = async (id: string, title: string) => {
     setGeneratingProjectId(id);
@@ -1802,10 +1801,10 @@ function AppContent() {
       {/* --- Research Section --- */}
       <section id="research" className="section-padding bg-bg-surface">
         <div className="content-max-width max-w-4xl">
-          <SectionHeader
-            label="// technical.presentation"
-            heading="Paper Presentation: RBS"
-            subtitle="Presented at SVEC (Sri Vasavi Engineering College), this technical study explores the optimization of Regenerative Braking Systems in modern EVs. The work focuses on motor-to-generator switching logic and energy recovery efficiency, achieving up to 60-70% capture in experimental benchmarks."
+          <SectionHeader 
+            label="// technical.report" 
+            heading="Paper Presentation: RBS" 
+            subtitle="Regenerative Braking Systems represent a critical frontier in EEE/EV technology, focusing on the seamless conversion of kinetic energy back into usable storage."
           />
 
           {PAPERS.map((paper, i) => (
@@ -1835,125 +1834,38 @@ function AppContent() {
                 ))}
               </div>
 
-              {/* Added Technical Highlights */}
-              <div className="mb-8 p-6 bg-bg-elevated/50 rounded-lg border border-accent-primary/5 border-l-2 border-l-accent-secondary">
-                <h4 className="text-accent-primary font-mono text-[10px] uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
-                  <Cpu size={14} className="text-accent-secondary" /> Technical Framework & Results
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                  {[
-                    "Energy Efficiency: 40% – 65% recovery achieved",
-                    "Regenerative Mode: BLDC motor variable generator",
-                    "Range Optimization: 10-15% extension in urban cycles",
-                    "Battery Longevity: Reduced thermal stress deceleration",
-                    "Storage Synergy: Supercapacitor buffer integration",
-                    "Braking Logic: Threshold-based control system"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2 text-text-muted font-mono text-[10px] leading-relaxed text-left">
-                      <span className="text-accent-secondary">•</span>
-                      {item}
-                    </div>
-                  ))}
+              {/* Aligned Technical Matter */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 p-6 bg-accent-primary/5 rounded-xl border border-accent-primary/10 group-hover:border-accent-primary/30 transition-all">
+                <div className="space-y-3">
+                  <h4 className="text-accent-primary font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
+                    <Zap size={14} /> Core Mechanism
+                  </h4>
+                  <p className="text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-80">
+                    A regenerative braking system (RBS) is an energy recovery mechanism that slows a vehicle by converting its kinetic energy into electrical energy, rather than wasting it as heat via traditional friction brakes.
+                  </p>
+                </div>
+                <div className="space-y-3 border-t md:border-t-0 md:border-l border-white/5 pt-6 md:pt-0 md:pl-8">
+                  <h4 className="text-accent-secondary font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
+                    <Cpu size={14} /> Operational Logic
+                  </h4>
+                  <p className="text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-80">
+                    When braking, the electric motor acts as a generator, feeding power back into the battery, increasing efficiency, reducing brake wear, and extending EV range by 10-15%.
+                  </p>
                 </div>
               </div>
-
-              {/* Research "Matter" - Actual Content Case Study */}
-              <div className="mb-8 p-8 bg-black/20 rounded-xl border border-white/5 relative group">
-                <div className="absolute -left-[3px] top-8 bottom-8 w-[3px] bg-gradient-to-b from-accent-primary to-accent-secondary opacity-50 transition-opacity group-hover:opacity-100" />
-                <h4 className="text-accent-secondary font-mono text-[10px] uppercase tracking-[0.4em] mb-6 flex items-center gap-3">
-                  <BookOpen size={14} /> Technical Paper Presentation Matter
-                </h4>
-                <div className="space-y-8 text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-90 transition-opacity group-hover:opacity-100">
-                  <div>
-                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Abstract</span>
-                    Regenerative braking systems (RBS) have become a key technology in electric vehicles (EVs) for improving energy efficiency and reducing energy losses. While conventional systems dissipate kinetic energy as heat, RBS converts this energy into electrical energy for battery storage. Our study demonstrates that RBS can recover up to 60-70% of barking energy depending on vehicle speed and system configuration.
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Working Principle</span>
-                      <ul className="space-y-1 text-[10px]">
-                        <li>1. Sensors detect deceleration via brake pedal.</li>
-                        <li>2. Motor switches from <span className="text-accent-secondary">Motor Mode</span> to <span className="text-accent-secondary">Generator Mode</span>.</li>
-                        <li>3. Rotating wheels drive the generator.</li>
-                        <li>4. Generated electrical energy is sent to battery storage.</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Hardware Setup</span>
-                      The setup consists of a BLDC Motor/Generator interface, a Rechargeable Battery pack, a Power Electronics Controller, and a dedicated Brake Control Unit. Our integration ensures variable generator control during frequent deceleration.
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Conclusion & Future Scope</span>
-                    Implementation of RBS significantly reduces environmental impact and improves EV sustainability. Future research focuses on AI-based braking control, integration with autonomous vehicles, and high-efficiency power electronics using supercapacitor storage synergies.
-                  </div>
-
-                  <div className="pt-4 border-t border-white/5 text-[9px] text-accent-secondary/60 italic">
-                    Dept. of EEE | Sri Vasavi Engineering College (SVEC)
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <button
-                  onClick={() => setSelectedPaperUrl(paper.url)}
-                  className="btn-outline h-10 w-fit flex items-center gap-2"
-                >
-                  View PDF <ExternalLink size={14} />
-                </button>
-                <a
-                  href={paper.url}
-                  download
-                  className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-secondary/50 text-accent-secondary hover:bg-accent-secondary/10"
-                >
-                  Save PDF <Download size={14} />
-                </a>
-              </div>
+              <a 
+                href={paper.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-outline h-10 w-fit flex items-center gap-2"
+              >
+                Read Paper <ExternalLink size={14} />
+              </a>
             </motion.div>
           ))}
         </div>
 
-        {/* Global Paper Viewer Modal */}
-        <AnimatePresence>
-          {selectedPaperUrl && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[6000] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-12"
-            >
-              <div className="w-full h-full max-w-6xl bg-bg-base rounded-2xl border border-white/10 overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                <button
-                  onClick={() => setSelectedPaperUrl(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full bg-black/50 text-white border border-white/10 hover:bg-accent-primary transition-colors z-[7000] group"
-                >
-                  <X size={20} className="group-hover:rotate-90 transition-transform" />
-                </button>
-                <object
-                  data={`${selectedPaperUrl}`}
-                  type="application/pdf"
-                  className="w-full h-full border-none"
-                  title="PDF Viewer"
-                >
-                  <div className="w-full h-full flex flex-col items-center justify-center p-12 text-center">
-                    <AlertCircle size={64} className="text-accent-primary mb-6 animate-pulse" />
-                    <h2 className="text-2xl font-display text-text-primary mb-4">Embedded Viewer Unsupported</h2>
-                    <p className="text-text-muted font-mono mb-8 max-w-md">Your browser current security settings or capabilities are preventing the PDF from being shown here.</p>
-                    <a
-                      href={selectedPaperUrl}
-                      className="px-8 py-3 bg-accent-primary text-bg-base font-mono font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
-                      download
-                    >
-                      Download PDF to View
-                    </a>
-                  </div>
-                </object>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </section>
 
 
