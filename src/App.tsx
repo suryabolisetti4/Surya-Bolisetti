@@ -590,35 +590,35 @@ const CERTIFICATIONS: Certification[] = [
     issuer: "Sri Vasavi Engineering College",
     date: "Dec 2023",
     url: "#",
-    imageUrl: "/ELECTRIC VEHICLE.jpeg"
+    imageUrl: "/cert_ev.jpg"
   },
   {
     title: "Robotics Technology (M-botix)",
     issuer: "Chefronics Technologies Pvt. Ltd.",
     date: "Oct 2024",
     url: "#",
-    imageUrl: "/ROBOTICS CERT.jpeg"
+    imageUrl: "/cert_robotics.jpg"
   },
   {
     title: "IOT with Embedded system Technology",
     issuer: "SRC e-Solutions / ALIET",
     date: "Sep 2025",
     url: "#",
-    imageUrl: "/IOT CERTIFICATE.jpeg"
+    imageUrl: "/cert_iot.jpg"
   },
   {
     title: "Drone Technology",
     issuer: "Aeroforge / ALIET",
     date: "Mar 2025",
     url: "#",
-    imageUrl: "/DRONE CERTIFICATE.jpeg"
+    imageUrl: "/cert_drone.jpg"
   },
   {
     title: "IIOT (Industrial Internet of Things)",
     issuer: "Andhra Loyola Institute (ALIET)",
     date: "Jan 2026",
     url: "#",
-    imageUrl: "/IIOT CERTIFICATE.jpeg"
+    imageUrl: "/cert_iiot.jpg"
   }
 ];
 
