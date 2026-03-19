@@ -77,17 +77,21 @@ import {
 const IDENTITY = {
   fullName: "SURYA BOLISETTI",
   initials: "SB",
-  stream: "Electrical & Electronics Engineering",
-  college: "Jawaharlal Nehru Technological University Kakinada",
+  title: "ELECTRICAL AND ELECTRONICS ENGINEER",
+  stream: "ELECTRICAL AND ELECTRONICS ENGINERING",
+  degree: "B.TECH EEE",
+  dob: "1-11-2004",
+  college: "Andhra Loyola Institute of Engineering and Technology",
   email: "venkatasuryabolisetti4@gmail.com",
-  bio1: "Electrical & Electronics Engineering student specializing in Embedded Systems, IoT, Smart Energy, and Industrial Automation.",
-  bio2: "Building intelligent, sustainable systems with a focus on ESP32, Arduino, and real-time power monitoring. Bridging the gap between hardware precision and software intelligence.",
-  degree: "B.Tech in Electrical & Electronics Engineering",
-  university: "Jawaharlal Nehru Technological University Kakinada",
+  bio1: "I am an Electrical and Electronics Engineering student focused on Electrical machines and transformers, power systems Embedded Systems, IoT, Smart Energy Technologies, and Industrial Automation — turning real-world engineering problems into reliable, scalable solutions.",
+  bio2: "Through industrial training at 33/11KV Substation, I built a strong foundation in power systems, electrical machines, control systems, and industrial maintenance — with the discipline for real production environments.",
+  bio3: "",
+  bio4: "",
+  university: "Andhra Loyola Institute of Engineering and Technology",
   years: "2024 - 2027",
   cgpa: "7.3",
   specialization: "Embedded Systems & Power Electronics",
-  location: "Annavarappadu, West Godavari",
+  location: "WEST GODAVARI, AP",
   github: "https://github.com/suryabolisetti",
   linkedin: "https://linkedin.com/in/suryabolisetti",
   resumeUrl: "#",
@@ -135,6 +139,14 @@ interface Certification {
   issuer: string;
   date: string;
   url: string;
+  imageUrl?: string;
+}
+
+interface Education {
+  degree: string;
+  institution: string;
+  location: string;
+  period: string;
   imageUrl?: string;
 }
 
@@ -502,13 +514,36 @@ const PROJECTS: Project[] = [
   {
     id: "04",
     title: "Regenerative Braking System",
-    description: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy for battery storage.",
+    description: "Prototype demonstrating energy recovery during braking in electric vehicles, converting kinetic energy back into electrical energy for battery storage. Achieved an energy recovery efficiency of 40% – 65% in experimental testing.",
     imageUrl: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=800&h=600",
     tags: ["Electric Vehicles", "Energy Recovery", "Motor Control", "Power Electronics"],
     githubUrl: "#",
     liveUrl: "—",
     status: "In Progress",
     category: "Green Tech"
+  }
+];
+
+const EDUCATION: Education[] = [
+  {
+    degree: "B.Tech in EEE",
+    institution: "Andhra Loyola Institute of Engineering and Technology",
+    location: "Vijayawada",
+    period: "2024 - 2027"
+  },
+  {
+    degree: "Diploma in EEE",
+    institution: "SRI VASAVI ENGINEERING COLLEGE",
+    location: "TADEPALLIGUDEM",
+    period: "2021 - 2024",
+    imageUrl: "/WhatsApp Image 2026-03-18 at 3.00.57 PM.jpeg"
+  },
+  {
+    degree: "SSC",
+    institution: "Roots School of Essential Faculties Tanuku",
+    location: "West Godavari, AP",
+    period: "Completed",
+    imageUrl: "/WhatsApp Image 2026-03-18 at 3.03.13 PM.jpeg"
   }
 ];
 
@@ -541,10 +576,10 @@ const EXPERIENCES: Experience[] = [
 
 const PAPERS: Paper[] = [
   {
-    title: "Optimization of MPPT Algorithms for Partial Shading Conditions",
-    abstract: "This paper proposes a hybrid PSO-P&O algorithm to track the global maximum power point in solar arrays under non-uniform irradiance. Experimental results show a 15% increase in efficiency compared to traditional methods.",
-    keywords: ["Solar Energy", "MPPT", "PSO", "Power Electronics"],
-    venue: "IEEE International Conference on Smart Power",
+    title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs",
+    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%, significantly reducing mechanical brake wear and extending battery life.",
+    keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
+    venue: "TECHNICAL PAPER PRESENTATION-2K26",
     url: "#"
   }
 ];
@@ -555,35 +590,35 @@ const CERTIFICATIONS: Certification[] = [
     issuer: "Sri Vasavi Engineering College",
     date: "Dec 2023",
     url: "#",
-    imageUrl: "/EV Certificate.pdf"
+    imageUrl: "/ELECTRIC VEHICLE.jpeg"
   },
   {
     title: "Robotics Technology (M-botix)",
     issuer: "Chefronics Technologies Pvt. Ltd.",
     date: "Oct 2024",
     url: "#",
-    imageUrl: "/Robotics.pdf"
+    imageUrl: "/ROBOTICS CERT.jpeg"
   },
   {
     title: "IOT with Embedded system Technology",
     issuer: "SRC e-Solutions / ALIET",
     date: "Sep 2025",
     url: "#",
-    imageUrl: "/Iot with embedded.pdf"
+    imageUrl: "/IOT CERTIFICATE.jpeg"
   },
   {
     title: "Drone Technology",
     issuer: "Aeroforge / ALIET",
     date: "Mar 2025",
     url: "#",
-    imageUrl: "/Drone technology.pdf"
+    imageUrl: "/DRONE CERTIFICATE.jpeg"
   },
   {
     title: "IIOT (Industrial Internet of Things)",
     issuer: "Andhra Loyola Institute (ALIET)",
     date: "Jan 2026",
     url: "#",
-    imageUrl: "/IIOT.pdf"
+    imageUrl: "/IIOT CERTIFICATE.jpeg"
   }
 ];
 
@@ -730,86 +765,6 @@ const ProjectCard = ({ project, onGenerateImage, isGenerating }: { project: Proj
   </motion.div>
 );
 
-const ProfileHeader = () => (
-  <section className="section-padding pt-32 pb-12 bg-bg-base relative overflow-hidden">
-    {/* Grid Background */}
-    <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-    </div>
-
-    <div className="content-max-width relative z-10">
-      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-        {/* Profile Image Space */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative group"
-        >
-          <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-2 border-accent-primary/30 relative z-10 bg-bg-elevated">
-            {IDENTITY.profilePic ? (
-              <img src={IDENTITY.profilePic} alt={IDENTITY.fullName} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-accent-primary/20">
-                <User size={80} />
-              </div>
-            )}
-            {/* Scanline effect on image */}
-            <div className="absolute inset-0 scanline-overlay pointer-events-none opacity-20" />
-          </div>
-          
-          {/* Decorative Frames */}
-          <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-accent-primary opacity-50" />
-          <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-accent-primary opacity-50" />
-          
-          {/* Status Indicator */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-4 py-1 bg-bg-base border border-accent-primary/30 rounded-full text-[10px] font-mono text-accent-primary whitespace-nowrap z-20">
-            <span className="inline-block w-2 h-2 bg-accent-primary rounded-full animate-pulse mr-2" />
-            SYSTEM ONLINE
-          </div>
-        </motion.div>
-
-        {/* Profile Info */}
-        <div className="flex-grow text-center md:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-display mb-4 glow-text">{IDENTITY.fullName}</h1>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-accent-primary font-mono uppercase tracking-widest opacity-60">Stream</span>
-                <span className="text-lg font-tech text-text-secondary">{IDENTITY.stream}</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-accent-primary font-mono uppercase tracking-widest opacity-60">College</span>
-                <span className="text-lg font-tech text-text-secondary">{IDENTITY.college}</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-accent-primary font-mono uppercase tracking-widest opacity-60">Mail ID</span>
-                <span className="text-lg font-tech text-text-secondary lowercase">{IDENTITY.email}</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-accent-primary font-mono uppercase tracking-widest opacity-60">Location</span>
-                <span className="text-lg font-tech text-text-secondary">{IDENTITY.location}</span>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-10">
-              <a href={`mailto:${IDENTITY.email}`} className="btn-primary">
-                <Mail size={16} className="mr-2" /> Contact Me
-              </a>
-              <a href={IDENTITY.github} className="btn-secondary">
-                <Github size={16} className="mr-2" /> GitHub
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 const ExperienceItem = ({ exp, index }: { exp: Experience, index: number, key?: React.Key }) => {
   const isLeft = index % 2 === 0;
@@ -937,6 +892,7 @@ function AppContent() {
   };
 
   const roles = [
+    "EEE Engineer",
     "Embedded Systems",
     "IoT Solutions",
     "Smart Energy",
@@ -1055,7 +1011,7 @@ function AppContent() {
         <Logo />
 
         <div className="hidden md:flex items-center gap-8">
-          {['Home', 'About', 'Skills', 'Projects', 'Experience', 'Research', 'Contact'].map(link => (
+          {['Home', 'About', 'Education', 'Skills', 'Projects', 'Research', 'Contact'].map(link => (
             <a 
               key={link} 
               href={`#${link.toLowerCase()}`}
@@ -1167,7 +1123,7 @@ function AppContent() {
             exit={{ opacity: 0, x: '100%' }}
             className="fixed inset-0 bg-bg-base z-[999] flex flex-col items-center justify-center gap-8"
           >
-            {['Home', 'About', 'Skills', 'Projects', 'Experience', 'Research', 'Contact'].map(link => (
+            {['Home', 'About', 'Education', 'Skills', 'Projects', 'Research', 'Contact'].map(link => (
               <a 
                 key={link} 
                 href={`#${link.toLowerCase()}`}
@@ -1184,193 +1140,259 @@ function AppContent() {
         )}
       </AnimatePresence>
 
-      {/* --- Profile Header --- */}
-      <ProfileHeader />
-
       {/* --- Hero Section --- */}
-      <section id="home" className="relative py-24 flex flex-col items-center justify-center text-center px-6 overflow-hidden bg-bg-surface">
+      <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 overflow-hidden bg-bg-base">
         {/* Circuit Background */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.08]">
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.05]">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="circuit-grid" width="100" height="100" patternUnits="userSpaceOnUse">
                 <path d="M 100 0 L 0 0 0 100" fill="none" stroke="var(--color-accent-primary)" strokeWidth="0.5" />
-                <circle cx="0" cy="0" r="1.5" fill="var(--color-accent-primary)" />
-                <circle cx="100" cy="0" r="1.5" fill="var(--color-accent-primary)" />
-                <circle cx="0" cy="100" r="1.5" fill="var(--color-accent-primary)" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit-grid)" />
-            
-            {/* Animated Traces */}
-            <path d="M 200 100 H 400 V 300 H 600" fill="none" stroke="var(--color-accent-primary)" strokeWidth="1" className="circuit-trace" />
-            <path d="M 800 600 V 400 H 1000 V 200" fill="none" stroke="var(--color-accent-primary)" strokeWidth="1" className="circuit-trace" />
-            <circle r="3" fill="var(--color-accent-primary)" className="pulse-dot" />
           </svg>
         </div>
 
         {/* Scanline Overlay */}
         <div className="absolute inset-0 scanline-overlay pointer-events-none z-[1]" />
 
-        <div className="relative z-[2] max-w-4xl">
+        <div className="relative z-[2] flex flex-col items-center max-w-5xl w-full">
+          {/* Profile Image with HUD */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 group flex items-center justify-center border-x-2 border-b-2 border-accent-primary bg-bg-elevated shadow-[0_0_30px_rgba(14,165,233,0.2)]"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative w-48 h-48 md:w-64 md:h-64 mb-12"
           >
-            {/* Chip Legs Decoration */}
-            <div className="absolute left-0 top-1/4 w-1 h-[2px] bg-accent-primary/40 -translate-x-full" />
-            <div className="absolute left-0 top-2/4 w-1 h-[2px] bg-accent-primary/40 -translate-x-full" />
-            <div className="absolute left-0 top-3/4 w-1 h-[2px] bg-accent-primary/40 -translate-x-full" />
-            <div className="absolute right-0 top-1/4 w-1 h-[2px] bg-accent-primary/40 translate-x-full" />
-            <div className="absolute right-0 top-2/4 w-1 h-[2px] bg-accent-primary/40 translate-x-full" />
-            <div className="absolute right-0 top-3/4 w-1 h-[2px] bg-accent-primary/40 translate-x-full" />
+            {/* HUD Rings */}
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-4 border border-dashed border-accent-primary/30 rounded-full"
+            />
+            <motion.div 
+              animate={{ rotate: -360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-8 border border-accent-secondary/20 rounded-full border-t-transparent border-b-transparent"
+            />
             
-            <span className="font-display text-accent-primary font-bold text-4xl md:text-5xl group-hover:scale-110 transition-transform">{IDENTITY.initials}</span>
+            {/* Corner Brackets */}
+            <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-accent-primary" />
+            <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-accent-primary" />
+            <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-accent-primary" />
+            <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-accent-primary" />
+
+            <div className="w-full h-full rounded-xl overflow-hidden border border-accent-primary/30 bg-bg-elevated relative z-10 shadow-[0_0_50px_rgba(var(--accent-primary-rgb),0.2)]">
+              <img 
+                src={IDENTITY.profilePic} 
+                alt={IDENTITY.fullName} 
+                className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-accent-primary/5 pointer-events-none" />
+            </div>
+
+            {/* Status Badge */}
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-bg-base border border-accent-primary/30 rounded-full text-[10px] font-mono text-accent-primary whitespace-nowrap z-20 shadow-lg">
+              <span className="inline-block w-2 h-2 bg-accent-primary rounded-full animate-pulse mr-2" />
+              SYSTEM ONLINE
+            </div>
           </motion.div>
 
+          {/* Name and Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-5xl md:text-[80px] font-syncopate font-bold text-text-primary leading-none tracking-tighter mb-4 uppercase drop-shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.3)]">
+              {IDENTITY.fullName}
+            </h1>
+            <p className="text-lg md:text-2xl font-mono text-accent-primary tracking-[0.4em] uppercase opacity-80">
+              {IDENTITY.title}
+            </p>
+          </motion.div>
+
+          {/* Identity Grid (rsmk style) */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-secondary/30 text-accent-secondary text-[10px] font-mono tracking-[0.2em] mb-8"
+            transition={{ delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 w-full max-w-4xl mb-16 font-mono"
           >
-            <span className="w-2 h-2 bg-accent-secondary rounded-full animate-pulse" />
-            AVAILABLE FOR OPPORTUNITIES
+            <div className="flex flex-col gap-1 border-l-2 border-accent-primary/20 pl-4">
+              <span className="text-[10px] text-accent-primary uppercase tracking-widest opacity-60">Stream</span>
+              <span className="text-sm md:text-base text-text-primary">{IDENTITY.stream}</span>
+            </div>
+            <div className="flex flex-col gap-1 border-l-2 border-accent-primary/20 pl-4">
+              <span className="text-[10px] text-accent-primary uppercase tracking-widest opacity-60">Degree</span>
+              <span className="text-sm md:text-base text-text-primary">{IDENTITY.degree}</span>
+            </div>
+            <div className="flex flex-col gap-1 border-l-2 border-accent-primary/20 pl-4">
+              <span className="text-[10px] text-accent-primary uppercase tracking-widest opacity-60">DOB</span>
+              <span className="text-sm md:text-base text-text-primary">{IDENTITY.dob}</span>
+            </div>
+            <div className="flex flex-col gap-1 border-l-2 border-accent-primary/20 pl-4">
+              <span className="text-[10px] text-accent-primary uppercase tracking-widest opacity-60">Location</span>
+              <span className="text-sm md:text-base text-text-primary">{IDENTITY.location}</span>
+            </div>
           </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-8xl font-jetbrains font-black text-text-primary mb-6 tracking-tight"
-          >
-            {IDENTITY.fullName}
-          </motion.h1>
-
+          {/* Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-2xl font-mono text-text-muted mb-8 h-8"
+            transition={{ delay: 0.8 }}
+            className="flex flex-wrap justify-center gap-6"
           >
-            I build <span className="text-accent-primary">{typewriterText}</span>
-            <span className="animate-pulse ml-1">|</span>
-          </motion.div>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-text-muted font-mono text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-12"
-          >
-            {IDENTITY.bio1}
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
-          >
-            <a href="#projects" className="btn-primary">View Projects</a>
-            <a href={IDENTITY.resumeUrl} className="btn-outline">Download CV</a>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex justify-center gap-8"
-          >
-            {[
-              { icon: <Github />, url: IDENTITY.github },
-              { icon: <Linkedin />, url: IDENTITY.linkedin },
-              { icon: <Mail />, url: `mailto:${IDENTITY.email}` },
-              { icon: <Globe />, url: "#" }
-            ].map((social, i) => (
-              <a 
-                key={i} 
-                href={social.url} 
-                className="text-text-muted hover:text-accent-primary hover:scale-125 transition-all duration-300"
-              >
-                {social.icon}
-              </a>
-            ))}
+            <a href={`mailto:${IDENTITY.email}`} className="btn-primary px-10 py-4 text-xs tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.3)]">
+              <Mail size={16} className="mr-2" /> Contact Me
+            </a>
+            <a href={IDENTITY.github} className="btn-outline px-10 py-4 text-xs tracking-[0.2em] uppercase">
+              <Github size={16} className="mr-2" /> GitHub
+            </a>
           </motion.div>
         </div>
 
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] font-mono text-text-muted uppercase tracking-[0.3em]">scroll</span>
+          <span className="text-[10px] font-mono text-text-muted uppercase tracking-[0.3em]">scroll to initialize</span>
           <ChevronDown className="text-accent-primary animate-bounce" />
         </motion.div>
       </section>
 
       {/* --- About Section --- */}
-      <section id="about" className="section-padding bg-bg-surface border-l-[3px] border-accent-primary">
-        <div className="content-max-width grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-16 items-center">
-          <div>
-            <SectionHeader label="// about_me" heading="Who I Am" />
-            <div className="space-y-6 text-text-muted font-mono text-sm md:text-base leading-loose mb-12">
-              <p>{IDENTITY.bio1}</p>
-              <p>{IDENTITY.bio2}</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 border-t border-bg-elevated pt-8">
-              {[
-                { icon: <GraduationCap size={16} />, label: "Degree", val: IDENTITY.degree },
-                { icon: <Globe size={16} />, label: "University", val: IDENTITY.university },
-                { icon: <MapPin size={16} />, label: "Location", val: IDENTITY.location },
-                { icon: <Lightbulb size={16} />, label: "Specialization", val: IDENTITY.specialization },
-                { icon: <Calendar size={16} />, label: "Batch", val: IDENTITY.years },
-                { icon: <BarChart3 size={16} />, label: "CGPA", val: IDENTITY.cgpa }
-              ].map((fact, i) => (
-                <div key={i} className="flex items-center gap-3 py-2 border-b border-bg-elevated/50">
-                  <span className="text-accent-primary">{fact.icon}</span>
-                  <span className="text-[11px] text-text-muted uppercase tracking-wider w-24">{fact.label}</span>
-                  <span className="text-xs text-text-primary font-medium">/ {fact.val}</span>
-                </div>
-              ))}
-            </div>
+      <section id="about" className="section-padding bg-bg-surface border-l-[3px] border-accent-primary overflow-hidden">
+        <div className="content-max-width">
+          <div className="mb-12">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-syncopate font-bold text-text-primary uppercase tracking-tight"
+            >
+              ABOUT <span className="text-accent-primary">ME</span>
+            </motion.h2>
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: '60px' }}
+              viewport={{ once: true }}
+              className="h-1 bg-accent-primary mt-4"
+            />
           </div>
 
-          <div className="flex flex-col items-center">
-            <div className="relative w-52 h-52 mb-12">
-              {/* Corner Brackets */}
-              <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-accent-secondary" />
-              <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-accent-secondary" />
-              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-accent-secondary" />
-              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-accent-secondary" />
-              
-              <div className="w-full h-full border-x-2 border-b-2 border-accent-primary bg-gradient-to-br from-bg-elevated to-bg-surface flex items-center justify-center shadow-[0_0_30px_rgba(14,165,233,0.2)]">
-                <span className="font-display text-5xl font-black text-accent-primary">{IDENTITY.initials}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-0 border border-accent-primary/20 rounded-lg overflow-hidden glass-card">
+            
+            {/* Left Side: Bio */}
+            <div className="p-8 md:p-10 bg-bg-base/50 border-b lg:border-b-0 lg:border-r border-accent-primary/20 flex flex-col">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-accent-primary font-mono text-xs tracking-widest uppercase">// BIO_LOGS</span>
+                <div className="h-[1px] flex-grow bg-accent-primary/20" />
+              </div>
+
+              <div className="flex-grow flex flex-col justify-center">
+                <div className="space-y-4 text-text-muted font-mono text-sm md:text-base leading-relaxed">
+                  <p>{IDENTITY.bio1}</p>
+                  <p>{IDENTITY.bio2}</p>
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 w-full">
-              {[
-                { num: IDENTITY.stats.projects, label: "Projects Built" },
-                { num: IDENTITY.stats.technologies, label: "Technologies" },
-                { num: IDENTITY.stats.certifications, label: "Certifications" },
-                { num: IDENTITY.stats.years, label: "Years Learning" }
-              ].map((stat, i) => (
-                <div key={i} className="text-center">
+            {/* Right Side: Stats/Quick Info */}
+            <div className="p-8 md:p-10 bg-bg-elevated/30 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-accent-secondary font-mono text-xs tracking-widest uppercase">// SYSTEM_STATS</span>
+                <div className="h-[1px] flex-grow bg-accent-secondary/20" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                {[
+                  { num: IDENTITY.stats.projects, label: "Projects" },
+                  { num: IDENTITY.stats.technologies, label: "Tech Stack" },
+                  { num: IDENTITY.stats.certifications, label: "Certs" },
+                  { num: IDENTITY.stats.years, label: "Years" }
+                ].map((stat, i) => (
                   <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="text-3xl md:text-4xl font-display font-bold text-accent-primary mb-1"
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="p-4 border border-accent-primary/10 rounded-lg bg-bg-base/50 hover:border-accent-primary/30 transition-all group"
                   >
-                    {stat.num}+
+                    <div className="text-2xl md:text-3xl font-display font-bold text-accent-primary mb-1 group-hover:scale-110 transition-transform origin-left">{stat.num}+</div>
+                    <div className="text-[9px] font-mono text-text-muted uppercase tracking-widest">{stat.label}</div>
                   </motion.div>
-                  <div className="text-[10px] font-mono text-text-muted uppercase tracking-widest leading-tight">{stat.label}</div>
+                ))}
+              </div>
+
+              <div className="mt-8 p-4 border border-accent-secondary/20 rounded-lg bg-bg-base/30">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-[9px] font-mono text-accent-secondary uppercase tracking-widest">Current Status</span>
+                  <span className="flex items-center gap-2 text-[9px] font-mono text-text-primary uppercase">
+                    <span className="w-1.5 h-1.5 bg-accent-secondary rounded-full animate-pulse" />
+                    Available
+                  </span>
                 </div>
-              ))}
+                <div className="w-full h-1 bg-bg-elevated rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '85%' }}
+                    viewport={{ once: true }}
+                    className="h-full bg-accent-secondary"
+                  />
+                </div>
+              </div>
             </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* --- Education Section --- */}
+      <section id="education" className="section-padding bg-bg-base border-l-[3px] border-accent-secondary">
+        <div className="content-max-width">
+          <SectionHeader label="// academic.history" heading="Education" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {EDUCATION.map((edu, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                onClick={() => edu.imageUrl && setSelectedCert(edu.imageUrl)}
+                className={`glass-card p-8 border-t-4 border-accent-primary relative overflow-hidden group ${edu.imageUrl ? 'cursor-pointer hover:border-accent-primary/50' : ''}`}
+              >
+                <div className="absolute -right-4 -top-4 text-accent-primary/5 group-hover:text-accent-primary/10 transition-colors">
+                  <GraduationCap size={120} />
+                </div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 text-accent-primary font-mono text-[10px] uppercase tracking-widest mb-4">
+                    <Calendar size={12} />
+                    {edu.period}
+                  </div>
+                  <h3 className="font-display text-xl text-text-primary mb-2 group-hover:text-accent-primary transition-colors">{edu.degree}</h3>
+                  <p className="text-text-muted font-mono text-sm mb-4 leading-relaxed">{edu.institution}</p>
+                  <div className="flex items-center gap-2 text-text-muted font-mono text-[11px] mb-6">
+                    <MapPin size={12} className="text-accent-secondary" />
+                    {edu.location}
+                  </div>
+                  {edu.imageUrl && (
+                    <button className="text-accent-secondary font-mono text-[10px] hover:underline flex items-center gap-1">
+                      View Certificate <ExternalLink size={10} />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -1467,28 +1489,14 @@ function AppContent() {
         </div>
       </section>
 
-      {/* --- Experience Section --- */}
-      <section id="experience" className="section-padding bg-bg-base overflow-hidden">
-        <div className="content-max-width">
-          <SectionHeader label="// experience.log" heading="My Journey" />
-          
-          <div className="relative mt-20">
-            {/* Center Line */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-accent-primary/30" />
-            
-            <div className="flex flex-col">
-              {EXPERIENCES.map((exp, i) => (
-                <ExperienceItem key={i} exp={exp} index={i} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* --- Research Section --- */}
       <section id="research" className="section-padding bg-bg-surface">
         <div className="content-max-width max-w-4xl">
-          <SectionHeader label="// research.papers" heading="Research Work" />
+          <SectionHeader 
+            label="// research.papers" 
+            heading="Regenerative Braking System" 
+            subtitle="A regenerative braking system (RBS) is an energy recovery mechanism that slows a vehicle by converting its kinetic energy into electrical energy, rather than wasting it as heat via traditional friction brakes. When braking, the electric motor acts as a generator, feeding power back into the battery, increasing efficiency, reducing brake wear, and extending EV range by 10-15%."
+          />
 
           {PAPERS.map((paper, i) => (
             <motion.div 
