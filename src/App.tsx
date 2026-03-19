@@ -1683,7 +1683,7 @@ function AppContent() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.25 + 0.4, duration: 0.3 }}
                     style={{ originX: isLeft ? 1 : 0 }}
-                    className={`absolute top-1/2 -translate-y-1/2 w-8 h-px bg-accent-primary/50 ${isLeft ? 'right-[calc(50%-2.5rem)]' : 'left-[calc(50%-2.5rem)]'}`}
+                    className={`absolute top-1/2 -translate-y-1/2 w-8 h-[2px] bg-gradient-to-r ${isLeft ? 'from-accent-primary/10 to-accent-primary right-1/2' : 'from-accent-primary to-accent-primary/10 left-1/2'}`}
                   />
                 </motion.div>
               );
