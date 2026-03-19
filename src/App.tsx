@@ -45,7 +45,8 @@ import {
   Loader2,
   Palette,
   Sparkles,
-  Wand2
+  Wand2,
+  Maximize2
 } from 'lucide-react';
 import { generateProjectImage } from './services/aiService';
 import { 
@@ -959,6 +960,37 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
             </div>
           </motion.div>
         </div>
+
+        {/* Embedded PDF Viewer */}
+        {project.liveUrl.endsWith('.pdf') && (
+          <motion.section 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 pt-20 border-t border-accent-primary/10"
+          >
+            <h2 className="text-accent-primary font-mono text-xs uppercase tracking-[0.3em] mb-12 flex items-center gap-2">
+              <div className="w-8 h-px bg-accent-primary" /> Full Research Paper
+            </h2>
+            <div className="w-full h-[800px] bg-bg-elevated rounded-xl border border-white/5 overflow-hidden relative group">
+              <iframe 
+                src={`${project.liveUrl}#toolbar=0`} 
+                className="w-full h-full border-none"
+                title={`${project.title} Paper`}
+              />
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 bg-accent-primary text-bg-base rounded-full shadow-xl flex items-center gap-2 font-mono text-[10px] uppercase font-bold tracking-widest hover:scale-105 transition-transform"
+                >
+                  <Maximize2 size={14} /> Full Screen
+                </a>
+              </div>
+            </div>
+          </motion.section>
+        )}
       </div>
 
       {/* Navigation Footer */}
@@ -1032,6 +1064,7 @@ function AppContent() {
   const [projects, setProjects] = useState<Project[]>(PROJECTS);
   const [generatingProjectId, setGeneratingProjectId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedPaperUrl, setSelectedPaperUrl] = useState<string | null>(null);
 
   const handleGenerateImage = async (id: string, title: string) => {
     setGeneratingProjectId(id);
@@ -1797,17 +1830,41 @@ function AppContent() {
                   </span>
                 ))}
               </div>
-              <a 
-                href={paper.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <button 
+                onClick={() => setSelectedPaperUrl(paper.url)} 
                 className="btn-outline h-10 w-fit flex items-center gap-2"
               >
-                Read Paper <ExternalLink size={14} />
-              </a>
+                Read Full Paper <ExternalLink size={14} />
+              </button>
             </motion.div>
           ))}
         </div>
+
+        {/* Global Paper Viewer Modal */}
+        <AnimatePresence>
+          {selectedPaperUrl && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[6000] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-12"
+            >
+              <div className="w-full h-full max-w-6xl bg-bg-base rounded-2xl border border-white/10 overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                <button 
+                  onClick={() => setSelectedPaperUrl(null)}
+                  className="absolute top-6 right-6 p-2 rounded-full bg-black/50 text-white border border-white/10 hover:bg-accent-primary transition-colors z-50 group"
+                >
+                  <X size={20} className="group-hover:rotate-90 transition-transform" />
+                </button>
+                <iframe 
+                  src={`${selectedPaperUrl}`} 
+                  className="w-full h-full border-none"
+                  title="PDF Viewer"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* --- Certifications Section --- */}
