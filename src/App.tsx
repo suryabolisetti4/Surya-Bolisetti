@@ -638,7 +638,7 @@ const PAPERS: Paper[] = [
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
     venue: "TECHNICAL PAPER PRESENTATION-2K26",
     url: "/research-paper.pdf",
-    images: ["/research-page-1.jpg", "/research-page-2.jpg"]
+    images: ["/research-page-2.jpg", "/research-page-1.jpg"]
   }
 ];
 
@@ -1856,27 +1856,6 @@ function AppContent() {
                   </p>
                 </div>
               </div>
-              {/* Technical Gallery Preview */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                {paper.images?.map((img, idx) => (
-                  <motion.div
-                    key={idx}
-                    whileHover={{ scale: 1.02 }}
-                    onClick={() => setActivePaperImages(paper.images || null)}
-                    className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/5 bg-black/20 group/img cursor-pointer"
-                  >
-                    <img 
-                      src={img} 
-                      alt={`Full Paper Preview ${idx + 1}`} 
-                      className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-4">
-                      <span className="text-[10px] font-mono text-accent-primary uppercase tracking-widest">Read Page {idx + 1}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
               <button 
                 onClick={() => paper.images && setActivePaperImages(paper.images)}
                 className="btn-outline h-10 w-fit flex items-center gap-2"
@@ -1912,12 +1891,12 @@ function AppContent() {
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="w-full max-w-5xl rounded-sm overflow-hidden border border-white/5 shadow-2xl bg-white"
+                        className="w-full max-w-5xl border border-white/5 shadow-2xl bg-white"
                       >
                           <img 
                             src={img} 
                             alt={`Paper Page ${idx + 1}`} 
-                            className="w-full h-auto block object-contain"
+                            className="w-full h-auto block"
                           />
                       </motion.div>
                    ))}
