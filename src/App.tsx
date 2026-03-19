@@ -1901,15 +1901,7 @@ function AppContent() {
                       </motion.div>
                    ))}
                    
-                   <div className="flex gap-4 mb-20">
-                      <a 
-                        href="/research-paper.pdf" 
-                        download 
-                        className="px-8 py-3 bg-accent-primary text-bg-base font-mono font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform flex items-center gap-2"
-                      >
-                        <Download size={18} /> Download Full PDF
-                      </a>
-                   </div>
+
                 </div>
               </div>
             </motion.div>
