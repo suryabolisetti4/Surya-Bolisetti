@@ -7,24 +7,24 @@ import * as React from 'react';
 import { useState, useEffect, useRef, Component } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { Logo } from './components/Logo';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink, 
-  Download, 
-  ChevronDown, 
-  Cpu, 
-  Zap, 
-  Globe, 
-  Code, 
-  Layers, 
-  Terminal, 
-  Award, 
-  BookOpen, 
-  Send, 
-  Menu, 
-  X, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Download,
+  ChevronDown,
+  Cpu,
+  Zap,
+  Globe,
+  Code,
+  Layers,
+  Terminal,
+  Award,
+  BookOpen,
+  Send,
+  Menu,
+  X,
   ArrowUp,
   GraduationCap,
   MapPin,
@@ -49,22 +49,22 @@ import {
   Maximize2
 } from 'lucide-react';
 import { generateProjectImage } from './services/aiService';
-import { 
-  auth, 
-  db, 
-  storage, 
-  googleProvider, 
-  signInWithPopup, 
-  signOut, 
-  onAuthStateChanged, 
-  doc, 
-  getDoc, 
-  setDoc, 
-  updateDoc, 
-  collection, 
-  query, 
-  where, 
-  getDocs, 
+import {
+  auth,
+  db,
+  storage,
+  googleProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  collection,
+  query,
+  where,
+  getDocs,
   serverTimestamp,
   ref,
   uploadBytes,
@@ -214,7 +214,7 @@ class ErrorBoundary extends Component<any, any> {
             <AlertCircle className="w-12 h-12 text-error mx-auto mb-4" />
             <h2 className="text-xl font-display text-text-primary mb-2">Application Error</h2>
             <p className="text-text-muted text-sm mb-6">{displayMessage}</p>
-            <button 
+            <button
               onClick={() => window.location.reload()}
               className="btn-primary w-full"
             >
@@ -272,13 +272,13 @@ const SettingsModal = ({ profile, onClose, onUpdate }: { profile: UserProfile, o
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-bg-base/90 backdrop-blur-sm z-[2000] flex items-center justify-center p-6"
     >
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         className="glass-card max-w-md w-full p-8 border border-accent-primary/20"
@@ -315,7 +315,7 @@ const SettingsModal = ({ profile, onClose, onUpdate }: { profile: UserProfile, o
 
           <div>
             <label className="block text-[10px] font-mono text-accent-primary uppercase tracking-widest mb-1">Display Name</label>
-            <input 
+            <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
@@ -330,9 +330,8 @@ const SettingsModal = ({ profile, onClose, onUpdate }: { profile: UserProfile, o
                 <button
                   key={t}
                   onClick={() => setTheme(t as any)}
-                  className={`px-3 py-2 rounded border text-[10px] font-mono uppercase tracking-wider transition-all ${
-                    theme === t ? 'bg-accent-primary border-accent-primary text-bg-base' : 'bg-bg-elevated border-accent-primary/20 text-text-muted hover:border-accent-primary/50'
-                  }`}
+                  className={`px-3 py-2 rounded border text-[10px] font-mono uppercase tracking-wider transition-all ${theme === t ? 'bg-accent-primary border-accent-primary text-bg-base' : 'bg-bg-elevated border-accent-primary/20 text-text-muted hover:border-accent-primary/50'
+                    }`}
                 >
                   {t}
                 </button>
@@ -342,18 +341,18 @@ const SettingsModal = ({ profile, onClose, onUpdate }: { profile: UserProfile, o
 
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono text-accent-primary uppercase tracking-widest">Notifications</span>
-            <button 
+            <button
               onClick={() => setNotifications(!notifications)}
               className={`w-10 h-5 rounded-full relative transition-colors ${notifications ? 'bg-accent-primary' : 'bg-bg-elevated'}`}
             >
-              <motion.div 
+              <motion.div
                 animate={{ x: notifications ? 20 : 2 }}
                 className="absolute top-1 w-3 h-3 rounded-full bg-white"
               />
             </button>
           </div>
 
-          <button 
+          <button
             onClick={handleSave}
             disabled={isSaving}
             className="w-full btn-primary h-10 mt-4"
@@ -397,7 +396,7 @@ const ProfileSetupModal = ({ user, onComplete }: { user: FirebaseUser, onComplet
     try {
       const lowerUsername = username.toLowerCase();
       await setDoc(doc(db, 'usernames', lowerUsername), { uid: user.uid });
-      
+
       const newProfile: UserProfile = {
         uid: user.uid,
         username: lowerUsername,
@@ -419,25 +418,25 @@ const ProfileSetupModal = ({ user, onComplete }: { user: FirebaseUser, onComplet
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-bg-base/90 backdrop-blur-sm z-[2000] flex items-center justify-center p-6"
     >
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         className="glass-card max-w-md w-full p-8 border border-accent-primary/20"
       >
         <h2 className="font-display text-2xl text-text-primary mb-2">Complete Your Profile</h2>
         <p className="text-text-muted text-sm mb-6">Choose a unique username to get started.</p>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-[10px] font-mono text-accent-primary uppercase tracking-widest mb-1">Username</label>
             <div className="relative">
-              <input 
+              <input
                 type="text"
                 value={username}
                 onChange={(e) => {
@@ -452,9 +451,9 @@ const ProfileSetupModal = ({ user, onComplete }: { user: FirebaseUser, onComplet
                 maxLength={20}
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                {isChecking ? <Loader2 size={14} className="animate-spin text-accent-primary" /> : 
-                 username.length >= 3 && !error ? <Check size={14} className="text-success" /> : 
-                 error ? <AlertCircle size={14} className="text-error" /> : null}
+                {isChecking ? <Loader2 size={14} className="animate-spin text-accent-primary" /> :
+                  username.length >= 3 && !error ? <Check size={14} className="text-success" /> :
+                    error ? <AlertCircle size={14} className="text-error" /> : null}
               </div>
             </div>
             {error && <p className="text-error text-[10px] mt-1">{error}</p>}
@@ -462,7 +461,7 @@ const ProfileSetupModal = ({ user, onComplete }: { user: FirebaseUser, onComplet
 
           <div>
             <label className="block text-[10px] font-mono text-accent-primary uppercase tracking-widest mb-1">Display Name</label>
-            <input 
+            <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
@@ -472,7 +471,7 @@ const ProfileSetupModal = ({ user, onComplete }: { user: FirebaseUser, onComplet
             />
           </div>
 
-          <button 
+          <button
             type="submit"
             disabled={isSubmitting || !!error || username.length < 3}
             className="w-full btn-primary h-10 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -683,7 +682,7 @@ const CERTIFICATIONS: Certification[] = [
 
 const SectionHeader = ({ label, heading, subtitle }: { label: string, heading: string, subtitle?: string }) => (
   <div className="text-center mb-16">
-    <motion.span 
+    <motion.span
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -691,7 +690,7 @@ const SectionHeader = ({ label, heading, subtitle }: { label: string, heading: s
     >
       {label}
     </motion.span>
-    <motion.h2 
+    <motion.h2
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -701,7 +700,7 @@ const SectionHeader = ({ label, heading, subtitle }: { label: string, heading: s
       {heading}
     </motion.h2>
     {subtitle && (
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -721,7 +720,7 @@ const SkillBar = ({ name, proficiency }: { name: string, proficiency: number, ke
       <span className="text-accent-primary font-mono text-xs">{proficiency}%</span>
     </div>
     <div className="h-1 bg-bg-elevated rounded-full overflow-hidden">
-      <motion.div 
+      <motion.div
         initial={{ width: 0 }}
         whileInView={{ width: `${proficiency}%` }}
         viewport={{ once: true }}
@@ -733,7 +732,7 @@ const SkillBar = ({ name, proficiency }: { name: string, proficiency: number, ke
 );
 
 const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: { project: Project, onViewDetail: (p: Project) => void, onGenerateImage: (id: string, title: string) => void, isGenerating: boolean, key?: React.Key }) => (
-  <motion.div 
+  <motion.div
     layout
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -744,19 +743,19 @@ const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: {
   >
     {/* Tech Corner Accent */}
     <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent-primary opacity-40 z-10" />
-    
-    <div 
+
+    <div
       className="h-52 relative overflow-hidden cursor-pointer"
       onClick={() => onViewDetail(project)}
     >
-      <img 
-        src={project.imageUrl} 
+      <img
+        src={project.imageUrl}
         alt={project.title}
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         referrerPolicy="no-referrer"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-transparent to-transparent opacity-80" />
-      
+
       {/* Category Badge */}
       <div className="absolute top-4 left-4 z-20">
         <span className="px-2 py-1 bg-bg-base/80 backdrop-blur-md border border-accent-primary/30 text-accent-primary font-mono text-[9px] uppercase tracking-widest rounded">
@@ -765,17 +764,17 @@ const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: {
       </div>
 
       <span className="font-jetbrains text-7xl text-white/5 absolute -bottom-4 -left-2 select-none pointer-events-none group-hover:text-accent-primary/10 transition-colors duration-500">{project.id}</span>
-      
+
       {/* AI Generate Button Overlay */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-[2px] z-30">
         <div className="flex flex-col gap-3">
-          <button 
+          <button
             onClick={(e) => { e.stopPropagation(); onViewDetail(project); }}
             className="flex items-center justify-center gap-2 px-6 py-2.5 bg-white text-black rounded-full font-jetbrains text-[10px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.4)]"
           >
             <ExternalLink size={14} /> View Details
           </button>
-          <button 
+          <button
             onClick={(e) => { e.stopPropagation(); onGenerateImage(project.id, project.title); }}
             disabled={isGenerating}
             className="flex items-center gap-2 px-5 py-2.5 bg-accent-primary text-bg-base rounded-full font-jetbrains text-[10px] font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
@@ -791,22 +790,21 @@ const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: {
       </div>
 
       <div className="absolute top-4 right-4 z-20">
-        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border backdrop-blur-md ${
-          project.status === 'Live' ? 'bg-success/20 border-success text-success shadow-[0_0_10px_rgba(34,197,94,0.2)]' :
-          project.status === 'In Progress' ? 'bg-accent-secondary/20 border-accent-secondary text-accent-secondary shadow-[0_0_10px_rgba(255,0,255,0.2)]' :
-          'bg-accent-primary/20 border-accent-primary text-accent-primary shadow-[0_0_10px_rgba(var(--accent-primary-rgb),0.2)]'
-        }`}>
+        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border backdrop-blur-md ${project.status === 'Live' ? 'bg-success/20 border-success text-success shadow-[0_0_10px_rgba(34,197,94,0.2)]' :
+            project.status === 'In Progress' ? 'bg-accent-secondary/20 border-accent-secondary text-accent-secondary shadow-[0_0_10px_rgba(255,0,255,0.2)]' :
+              'bg-accent-primary/20 border-accent-primary text-accent-primary shadow-[0_0_10px_rgba(var(--accent-primary-rgb),0.2)]'
+          }`}>
           {project.status}
         </span>
       </div>
     </div>
-    
+
     <div className="p-6 flex-grow flex flex-col">
       <h3 className="font-display text-xl text-text-primary mb-3 group-hover:text-accent-primary transition-colors duration-300">{project.title}</h3>
       <p className="text-text-muted font-mono text-xs leading-relaxed line-clamp-3 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
         {project.description}
       </p>
-      
+
       <div className="mt-auto">
         <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map(tag => (
@@ -820,7 +818,7 @@ const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: {
           <a href={project.githubUrl} className="flex items-center gap-2 text-text-muted hover:text-accent-primary transition-colors text-[10px] font-mono uppercase tracking-wider">
             <Github size={14} /> Repository
           </a>
-          <button 
+          <button
             onClick={() => onViewDetail(project)}
             className="flex items-center gap-2 text-accent-secondary hover:brightness-125 transition-all text-[10px] font-mono uppercase tracking-wider"
           >
@@ -833,7 +831,7 @@ const ProjectCard = ({ project, onViewDetail, onGenerateImage, isGenerating }: {
 );
 
 const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => void }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
@@ -842,14 +840,14 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
     <div className="min-h-screen relative">
       {/* Hero Header */}
       <div className="h-[60vh] relative">
-        <img 
-          src={project.imageUrl} 
-          alt={project.title} 
+        <img
+          src={project.imageUrl}
+          alt={project.title}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-base/50 to-bg-base" />
-        
-        <button 
+
+        <button
           onClick={onClose}
           className="absolute top-8 left-8 p-3 rounded-full bg-black/50 text-white backdrop-blur-md border border-white/10 hover:bg-accent-primary transition-colors flex items-center gap-2 font-mono text-xs uppercase tracking-widest z-50"
         >
@@ -945,9 +943,9 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
                 </div>
                 <ExternalLink size={14} className="text-text-muted" />
               </a>
-              <a 
-                href={project.liveUrl !== '—' ? project.liveUrl : '#'} 
-                target="_blank" 
+              <a
+                href={project.liveUrl !== '—' ? project.liveUrl : '#'}
+                target="_blank"
                 rel="noopener noreferrer"
                 disabled={project.liveUrl === '—'}
                 className={`w-full flex items-center justify-between p-4 bg-bg-elevated border border-accent-secondary/20 rounded hover:border-accent-secondary transition-all group ${project.liveUrl === '—' ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -964,7 +962,7 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
 
         {/* Embedded PDF Viewer */}
         {project.liveUrl.toLowerCase().endsWith('.pdf') && (
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -974,8 +972,8 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
               <div className="w-8 h-px bg-accent-primary" /> Full Research Paper
             </h2>
             <div className="w-full h-[800px] bg-bg-elevated rounded-xl border border-white/5 overflow-hidden relative group">
-              <object 
-                data={`${project.liveUrl}#toolbar=0`} 
+              <object
+                data={`${project.liveUrl}#toolbar=0`}
                 type="application/pdf"
                 className="w-full h-full border-none"
                 title={`${project.title} Paper`}
@@ -987,9 +985,9 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
                 </div>
               </object>
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <a 
-                  href={project.liveUrl} 
-                  target="_blank" 
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 bg-accent-primary text-bg-base rounded-full shadow-xl flex items-center gap-2 font-mono text-[10px] uppercase font-bold tracking-widest hover:scale-105 transition-transform"
                 >
@@ -1005,7 +1003,7 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
       <div className="mt-20 border-t border-accent-primary/10 py-20 bg-bg-surface/30">
         <div className="max-w-4xl mx-auto text-center px-6">
           <p className="text-text-muted font-mono text-[10px] uppercase tracking-[0.4em] mb-4">WANT TO SEE MORE?</p>
-          <button 
+          <button
             onClick={onClose}
             className="font-syncopate text-2xl md:text-3xl font-bold text-text-primary hover:text-accent-primary transition-colors uppercase cursor-pointer"
           >
@@ -1024,9 +1022,9 @@ const ExperienceItem = ({ exp, index }: { exp: Experience, index: number, key?: 
     <div className={`flex w-full mb-12 items-center justify-center relative ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
       {/* Node */}
       <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-accent-primary rounded-full z-10 shadow-[0_0_10px_rgba(0,242,255,0.5)] border-4 border-bg-base" />
-      
+
       {/* Content */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -1160,8 +1158,8 @@ function AppContent() {
       const i = loopNum % roles.length;
       const fullText = roles[i];
 
-      setTypewriterText(isDeleting 
-        ? fullText.substring(0, typewriterText.length - 1) 
+      setTypewriterText(isDeleting
+        ? fullText.substring(0, typewriterText.length - 1)
         : fullText.substring(0, typewriterText.length + 1)
       );
 
@@ -1188,7 +1186,7 @@ function AppContent() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const filteredProjects = projects.filter(p => 
+  const filteredProjects = projects.filter(p =>
     projectFilter === 'All' || p.category === projectFilter
   );
 
@@ -1266,8 +1264,8 @@ function AppContent() {
 
         <div className="hidden md:flex items-center gap-8">
           {['Home', 'About', 'Education', 'Skills', 'Projects', 'Research', 'Contact'].map(link => (
-            <a 
-              key={link} 
+            <a
+              key={link}
               href={`#${link.toLowerCase()}`}
               className="text-text-muted font-mono text-[13px] hover:text-accent-primary transition-colors relative group"
             >
@@ -1285,7 +1283,7 @@ function AppContent() {
           </div>
 
           {/* Theme Toggle */}
-          <button 
+          <button
             onClick={() => setShowSettings(true)}
             className="p-2 rounded-full border border-accent-primary/20 text-accent-primary hover:bg-accent-primary/10 transition-all hidden sm:flex"
             title="Change Theme"
@@ -1299,7 +1297,7 @@ function AppContent() {
               <div className="w-8 h-8 rounded-full bg-bg-elevated animate-pulse" />
             ) : user ? (
               <div className="flex items-center gap-3">
-                <button 
+                <button
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                   className="relative w-8 h-8 rounded-full border border-accent-primary/30 overflow-hidden hover:border-accent-primary transition-colors"
                 >
@@ -1311,7 +1309,7 @@ function AppContent() {
                     </div>
                   )}
                 </button>
-                
+
                 <AnimatePresence>
                   {isProfileDropdownOpen && (
                     <motion.div
@@ -1327,7 +1325,7 @@ function AppContent() {
                       <button className="w-full flex items-center gap-2 px-3 py-2 text-xs text-text-muted hover:text-accent-primary hover:bg-accent-primary/5 rounded transition-colors">
                         <User size={14} /> Profile
                       </button>
-                      <button 
+                      <button
                         onClick={() => {
                           setShowSettings(true);
                           setIsProfileDropdownOpen(false);
@@ -1336,7 +1334,7 @@ function AppContent() {
                       >
                         <Settings size={14} /> Settings
                       </button>
-                      <button 
+                      <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-2 px-3 py-2 text-xs text-error hover:bg-error/5 rounded transition-colors mt-1"
                       >
@@ -1347,7 +1345,7 @@ function AppContent() {
                 </AnimatePresence>
               </div>
             ) : (
-              <button 
+              <button
                 onClick={handleLogin}
                 className="flex items-center gap-2 px-4 py-1.5 rounded border border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-bg-base transition-all text-[10px] font-mono tracking-widest uppercase"
               >
@@ -1359,7 +1357,7 @@ function AppContent() {
           <a href={IDENTITY.resumeUrl} className="btn-outline h-9 px-4 text-[11px] hidden sm:flex">
             <Download size={14} /> CV
           </a>
-          <button 
+          <button
             className="md:hidden text-text-primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -1371,15 +1369,15 @@ function AppContent() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             className="fixed inset-0 bg-bg-base z-[999] flex flex-col items-center justify-center gap-8"
           >
             {['Home', 'About', 'Education', 'Skills', 'Projects', 'Research', 'Contact'].map(link => (
-              <a 
-                key={link} 
+              <a
+                key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setIsMenuOpen(false)}
                 className="text-text-primary font-display text-2xl hover:text-accent-primary transition-colors"
@@ -1420,17 +1418,17 @@ function AppContent() {
             className="relative w-48 h-48 md:w-64 md:h-64 mb-12"
           >
             {/* HUD Rings */}
-            <motion.div 
+            <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute -inset-4 border border-dashed border-accent-primary/30 rounded-full"
             />
-            <motion.div 
+            <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
               className="absolute -inset-8 border border-accent-secondary/20 rounded-full border-t-transparent border-b-transparent"
             />
-            
+
             {/* Corner Brackets */}
             <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-accent-primary" />
             <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-accent-primary" />
@@ -1438,9 +1436,9 @@ function AppContent() {
             <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-accent-primary" />
 
             <div className="w-full h-full rounded-xl overflow-hidden border border-accent-primary/30 bg-bg-elevated relative z-10 shadow-[0_0_50px_rgba(var(--accent-primary-rgb),0.2)]">
-              <img 
-                src={IDENTITY.profilePic} 
-                alt={IDENTITY.fullName} 
+              <img
+                src={IDENTITY.profilePic}
+                alt={IDENTITY.fullName}
                 className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
@@ -1470,7 +1468,7 @@ function AppContent() {
           </motion.div>
 
           {/* Identity Grid (rsmk style) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -1495,7 +1493,7 @@ function AppContent() {
           </motion.div>
 
           {/* Buttons */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
@@ -1510,7 +1508,7 @@ function AppContent() {
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -1525,7 +1523,7 @@ function AppContent() {
       <section id="about" className="section-padding bg-bg-surface border-l-[3px] border-accent-primary overflow-hidden">
         <div className="content-max-width">
           <div className="mb-12">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1533,7 +1531,7 @@ function AppContent() {
             >
               ABOUT <span className="text-accent-primary">ME</span>
             </motion.h2>
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: '60px' }}
               viewport={{ once: true }}
@@ -1542,7 +1540,7 @@ function AppContent() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[7fr_3fr] gap-0 border border-accent-primary/20 rounded-lg overflow-hidden glass-card">
-            
+
             {/* Left Side: Bio */}
             <div className="p-8 md:p-10 bg-bg-base/50 border-b lg:border-b-0 lg:border-r border-accent-primary/20 flex flex-col">
               <div className="flex items-center gap-3 mb-6">
@@ -1572,7 +1570,7 @@ function AppContent() {
                   { num: IDENTITY.stats.certifications, label: "Certs" },
                   { num: IDENTITY.stats.years, label: "Years" }
                 ].map((stat, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -1595,7 +1593,7 @@ function AppContent() {
                   </span>
                 </div>
                 <div className="w-full h-1 bg-bg-elevated rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: '85%' }}
                     viewport={{ once: true }}
@@ -1704,17 +1702,16 @@ function AppContent() {
       <section id="skills" className="section-padding bg-bg-base">
         <div className="content-max-width">
           <SectionHeader label="// skill_matrix" heading="Technical Arsenal" />
-          
+
           <div className="flex flex-wrap justify-center gap-3 mb-16">
             {Object.keys(skillCategories).map(cat => (
-              <button 
+              <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`px-6 py-2 rounded-full font-mono text-xs tracking-wider transition-all border ${
-                  activeTab === cat 
-                  ? 'bg-accent-primary border-accent-primary text-bg-base shadow-[0_0_15px_rgba(14,165,233,0.3)]' 
-                  : 'border-text-muted/30 text-text-muted hover:border-accent-primary hover:text-accent-primary'
-                }`}
+                className={`px-6 py-2 rounded-full font-mono text-xs tracking-wider transition-all border ${activeTab === cat
+                    ? 'bg-accent-primary border-accent-primary text-bg-base shadow-[0_0_15px_rgba(14,165,233,0.3)]'
+                    : 'border-text-muted/30 text-text-muted hover:border-accent-primary hover:text-accent-primary'
+                  }`}
               >
                 {cat}
               </button>
@@ -1722,7 +1719,7 @@ function AppContent() {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div 
+            <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1760,29 +1757,28 @@ function AppContent() {
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {['All', 'Electronics', 'Automation', 'Smart City', 'Green Tech'].map(filter => (
-              <button 
+              <button
                 key={filter}
                 onClick={() => setProjectFilter(filter)}
-                className={`px-5 py-1.5 rounded-full font-mono text-[11px] tracking-widest transition-all border ${
-                  projectFilter === filter 
-                  ? 'bg-accent-primary border-accent-primary text-bg-base' 
-                  : 'border-text-muted/20 text-text-muted hover:border-accent-primary/50'
-                }`}
+                className={`px-5 py-1.5 rounded-full font-mono text-[11px] tracking-widest transition-all border ${projectFilter === filter
+                    ? 'bg-accent-primary border-accent-primary text-bg-base'
+                    : 'border-text-muted/20 text-text-muted hover:border-accent-primary/50'
+                  }`}
               >
                 {filter}
               </button>
             ))}
           </div>
 
-          <motion.div 
+          <motion.div
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             <AnimatePresence>
               {filteredProjects.map(project => (
-                <ProjectCard 
-                  key={project.id} 
-                  project={project} 
+                <ProjectCard
+                  key={project.id}
+                  project={project}
                   onViewDetail={(p) => setSelectedProject(p)}
                   onGenerateImage={handleGenerateImage}
                   isGenerating={generatingProjectId === project.id}
@@ -1795,9 +1791,9 @@ function AppContent() {
         {/* Project Details Modal/Overlay */}
         <AnimatePresence>
           {selectedProject && (
-            <ProjectDetail 
-              project={selectedProject} 
-              onClose={() => setSelectedProject(null)} 
+            <ProjectDetail
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
             />
           )}
         </AnimatePresence>
@@ -1806,14 +1802,14 @@ function AppContent() {
       {/* --- Research Section --- */}
       <section id="research" className="section-padding bg-bg-surface">
         <div className="content-max-width max-w-4xl">
-          <SectionHeader 
-            label="// technical.presentation" 
-            heading="Paper Presentation: RBS" 
+          <SectionHeader
+            label="// technical.presentation"
+            heading="Paper Presentation: RBS"
             subtitle="Presented at SVEC (Sri Vasavi Engineering College), this technical study explores the optimization of Regenerative Braking Systems in modern EVs. The work focuses on motor-to-generator switching logic and energy recovery efficiency, achieving up to 60-70% capture in experimental benchmarks."
           />
 
           {PAPERS.map((paper, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -1821,7 +1817,7 @@ function AppContent() {
               className="bg-bg-base border-l-4 border-accent-primary rounded-r-xl p-8 mb-8 group"
             >
               <div className="flex justify-between items-start mb-4">
-                <span className="text-[10px] font-mono text-accent-secondary tracking-[0.3em] uppercase">Paper #0{i+1}</span>
+                <span className="text-[10px] font-mono text-accent-secondary tracking-[0.3em] uppercase">Paper #0{i + 1}</span>
                 <span className="px-3 py-1 border border-accent-primary/30 rounded-full text-[10px] text-accent-primary font-mono uppercase tracking-widest">
                   {paper.venue}
                 </span>
@@ -1869,13 +1865,13 @@ function AppContent() {
                 </h4>
                 <div className="space-y-8 text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-90 transition-opacity group-hover:opacity-100">
                   <div>
-                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Abstract</span> 
+                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Abstract</span>
                     Regenerative braking systems (RBS) have become a key technology in electric vehicles (EVs) for improving energy efficiency and reducing energy losses. While conventional systems dissipate kinetic energy as heat, RBS converts this energy into electrical energy for battery storage. Our study demonstrates that RBS can recover up to 60-70% of barking energy depending on vehicle speed and system configuration.
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Working Principle</span> 
+                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Working Principle</span>
                       <ul className="space-y-1 text-[10px]">
                         <li>1. Sensors detect deceleration via brake pedal.</li>
                         <li>2. Motor switches from <span className="text-accent-secondary">Motor Mode</span> to <span className="text-accent-secondary">Generator Mode</span>.</li>
@@ -1884,13 +1880,13 @@ function AppContent() {
                       </ul>
                     </div>
                     <div>
-                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Hardware Setup</span> 
+                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Hardware Setup</span>
                       The setup consists of a BLDC Motor/Generator interface, a Rechargeable Battery pack, a Power Electronics Controller, and a dedicated Brake Control Unit. Our integration ensures variable generator control during frequent deceleration.
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Conclusion & Future Scope</span> 
+                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Conclusion & Future Scope</span>
                     Implementation of RBS significantly reduces environmental impact and improves EV sustainability. Future research focuses on AI-based braking control, integration with autonomous vehicles, and high-efficiency power electronics using supercapacitor storage synergies.
                   </div>
 
@@ -1901,15 +1897,15 @@ function AppContent() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <button 
-                  onClick={() => setSelectedPaperUrl(paper.url)} 
+                <button
+                  onClick={() => setSelectedPaperUrl(paper.url)}
                   className="btn-outline h-10 w-fit flex items-center gap-2"
                 >
                   View PDF <ExternalLink size={14} />
                 </button>
-                <a 
-                  href={paper.url} 
-                  download 
+                <a
+                  href={paper.url}
+                  download
                   className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-secondary/50 text-accent-secondary hover:bg-accent-secondary/10"
                 >
                   Save PDF <Download size={14} />
@@ -1922,21 +1918,21 @@ function AppContent() {
         {/* Global Paper Viewer Modal */}
         <AnimatePresence>
           {selectedPaperUrl && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[6000] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-12"
             >
               <div className="w-full h-full max-w-6xl bg-bg-base rounded-2xl border border-white/10 overflow-hidden relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                <button 
+                <button
                   onClick={() => setSelectedPaperUrl(null)}
                   className="absolute top-6 right-6 p-2 rounded-full bg-black/50 text-white border border-white/10 hover:bg-accent-primary transition-colors z-[7000] group"
                 >
                   <X size={20} className="group-hover:rotate-90 transition-transform" />
                 </button>
-                <object 
-                  data={`${selectedPaperUrl}`} 
+                <object
+                  data={`${selectedPaperUrl}`}
                   type="application/pdf"
                   className="w-full h-full border-none"
                   title="PDF Viewer"
@@ -1945,8 +1941,8 @@ function AppContent() {
                     <AlertCircle size={64} className="text-accent-primary mb-6 animate-pulse" />
                     <h2 className="text-2xl font-display text-text-primary mb-4">Embedded Viewer Unsupported</h2>
                     <p className="text-text-muted font-mono mb-8 max-w-md">Your browser current security settings or capabilities are preventing the PDF from being shown here.</p>
-                    <a 
-                      href={selectedPaperUrl} 
+                    <a
+                      href={selectedPaperUrl}
                       className="px-8 py-3 bg-accent-primary text-bg-base font-mono font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(var(--accent-primary-rgb),0.4)]"
                       download
                     >
@@ -1964,10 +1960,10 @@ function AppContent() {
       <section id="certifications" className="section-padding bg-bg-base">
         <div className="content-max-width">
           <SectionHeader label="// certifications.verified" heading="Certified Skills" />
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {CERTIFICATIONS.map((cert, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1994,9 +1990,9 @@ function AppContent() {
       {/* --- Contact Section --- */}
       <section id="contact" className="section-padding bg-bg-surface">
         <div className="content-max-width">
-          <SectionHeader 
-            label="// open_channel()" 
-            heading="Get In Touch" 
+          <SectionHeader
+            label="// open_channel()"
+            heading="Get In Touch"
             subtitle="Whether it's a collaboration, internship, or just a chat about circuits — I'm listening."
           />
 
@@ -2025,7 +2021,7 @@ function AppContent() {
               {/* Oscilloscope Waveform */}
               <div className="h-20 w-full relative overflow-hidden opacity-40">
                 <svg width="100%" height="100%" viewBox="0 0 400 100" preserveAspectRatio="none">
-                  <motion.path 
+                  <motion.path
                     d="M 0 50 Q 25 0 50 50 T 100 50 T 150 50 T 200 50 T 250 50 T 300 50 T 350 50 T 400 50"
                     fill="none"
                     stroke="var(--color-accent-primary)"
@@ -2040,15 +2036,15 @@ function AppContent() {
 
             <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Signal Sent! (Simulation)"); }}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
+                <input
+                  type="text"
+                  placeholder="Your Name"
                   className="w-full bg-bg-elevated border border-accent-primary/10 rounded-lg p-4 font-mono text-sm text-text-primary focus:border-accent-primary focus:outline-none transition-all placeholder:text-text-muted"
                   required
                 />
-                <input 
-                  type="email" 
-                  placeholder="your@email.com" 
+                <input
+                  type="email"
+                  placeholder="your@email.com"
                   className="w-full bg-bg-elevated border border-accent-primary/10 rounded-lg p-4 font-mono text-sm text-text-primary focus:border-accent-primary focus:outline-none transition-all placeholder:text-text-muted"
                   required
                 />
@@ -2061,8 +2057,8 @@ function AppContent() {
                 <option>Research Discussion</option>
                 <option>General</option>
               </select>
-              <textarea 
-                placeholder="Tell me what's on your mind..." 
+              <textarea
+                placeholder="Tell me what's on your mind..."
                 rows={5}
                 className="w-full bg-bg-elevated border border-accent-primary/10 rounded-lg p-4 font-mono text-sm text-text-primary focus:border-accent-primary focus:outline-none transition-all placeholder:text-text-muted resize-none"
                 required
@@ -2078,12 +2074,12 @@ function AppContent() {
       {/* Profile Setup Modal */}
       <AnimatePresence>
         {showProfileSetup && user && (
-          <ProfileSetupModal 
-            user={user} 
+          <ProfileSetupModal
+            user={user}
             onComplete={(newProfile) => {
               setProfile(newProfile);
               setShowProfileSetup(false);
-            }} 
+            }}
           />
         )}
       </AnimatePresence>
@@ -2091,8 +2087,8 @@ function AppContent() {
       {/* Settings Modal */}
       <AnimatePresence>
         {showSettings && profile && (
-          <SettingsModal 
-            profile={profile} 
+          <SettingsModal
+            profile={profile}
             onClose={() => setShowSettings(false)}
             onUpdate={(updated) => setProfile(updated)}
           />
@@ -2131,7 +2127,7 @@ function AppContent() {
           </div>
 
           {showBackToTop && (
-            <button 
+            <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="fixed bottom-8 right-8 w-12 h-12 rounded-full border border-accent-primary/30 bg-bg-surface/80 backdrop-blur-md flex items-center justify-center text-accent-primary hover:bg-accent-primary hover:text-bg-base transition-all z-[1000] shadow-lg"
             >
@@ -2144,21 +2140,21 @@ function AppContent() {
       {/* Certificate Modal */}
       <AnimatePresence>
         {selectedCert && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-bg-base/90 backdrop-blur-xl"
             onClick={() => setSelectedCert(null)}
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="relative max-w-5xl w-full bg-bg-surface rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <button 
+              <button
                 onClick={() => setSelectedCert(null)}
                 className="absolute top-4 right-4 w-10 h-10 rounded-full bg-bg-base/50 flex items-center justify-center text-text-primary hover:bg-accent-primary transition-colors z-10"
               >
@@ -2166,15 +2162,15 @@ function AppContent() {
               </button>
               <div className="p-2 h-[85vh]">
                 {selectedCert.toLowerCase().endsWith('.pdf') ? (
-                  <iframe 
-                    src={selectedCert} 
+                  <iframe
+                    src={selectedCert}
                     className="w-full h-full rounded-lg"
                     title="Certificate PDF"
                   />
                 ) : (
-                  <img 
-                    src={selectedCert} 
-                    alt="Certificate" 
+                  <img
+                    src={selectedCert}
+                    alt="Certificate"
                     className="w-full h-auto object-contain max-h-full rounded-lg mx-auto"
                     referrerPolicy="no-referrer"
                   />
