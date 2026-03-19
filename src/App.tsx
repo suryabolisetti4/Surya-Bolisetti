@@ -122,6 +122,7 @@ interface Project {
   tags: string[];
   githubUrl: string;
   liveUrl: string;
+  docsUrl?: string;
   status: ProjectStatus;
   category: string;
 }
@@ -574,6 +575,7 @@ const PROJECTS: Project[] = [
     tags: ["Electric Vehicles", "Energy Recovery", "Motor Control", "Power Electronics"],
     githubUrl: "#",
     liveUrl: "/research-paper.pdf",
+    docsUrl: "/research-paper.docx",
     status: "In Progress",
     category: "Green Tech"
   }
@@ -631,11 +633,18 @@ const EXPERIENCES: Experience[] = [
 
 const PAPERS: Paper[] = [
   {
-    title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs",
-    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%, significantly reducing mechanical brake wear and extending battery life.",
+    title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs (PDF)",
+    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%.",
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
-    venue: "TECHNICAL PAPER PRESENTATION-2K26",
+    venue: "TECHNICAL PAPER PRESENTATION-2K26 (PDF Version)",
     url: "/research-paper.pdf"
+  },
+  {
+    title: "Regenerative Braking System: Project Documentation & Analysis (DOCX)",
+    abstract: "The complete technical documentation and project analysis for the Regenerative Braking System, highlighting the development lifecycle, component selection, and experimental testing results in a structured document format.",
+    keywords: ["Project Documentation", "Technical Analysis", "EV Infrastructure", "Engineering Thesis"],
+    venue: "TECHNICAL PAPER PRESENTATION-2K26 (Word Version)",
+    url: "/research-paper.docx"
   }
 ];
 
@@ -956,6 +965,21 @@ const ProjectDetail = ({ project, onClose }: { project: Project, onClose: () => 
                 </div>
                 <Download size={14} className="text-text-muted" />
               </a>
+
+              {project.docsUrl && (
+                <a 
+                  href={project.docsUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between p-4 bg-bg-elevated border border-accent-primary/20 rounded hover:border-accent-primary transition-all group mt-2"
+                >
+                  <div className="flex items-center gap-4">
+                    <BookOpen size={20} className="text-text-muted group-hover:text-accent-primary" />
+                    <span className="font-mono text-xs uppercase tracking-widest">Project Documentation (DOCX)</span>
+                  </div>
+                  <Download size={14} className="text-text-muted" />
+                </a>
+              )}
             </div>
           </motion.div>
         </div>
