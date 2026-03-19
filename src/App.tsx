@@ -141,6 +141,7 @@ interface Paper {
   venue: string;
   url: string;
   docsUrl?: string;
+  images?: string[];
 }
 
 interface Certification {
@@ -633,10 +634,11 @@ const EXPERIENCES: Experience[] = [
 const PAPERS: Paper[] = [
   {
     title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs",
-    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%.",
+    abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%, significantly reducing mechanical brake wear and extending battery life.",
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
     venue: "TECHNICAL PAPER PRESENTATION-2K26",
-    url: "/research-paper.pdf"
+    url: "/research-paper.pdf",
+    images: ["/research-page-1.jpg", "/research-page-2.jpg"]
   }
 ];
 
@@ -1853,6 +1855,28 @@ function AppContent() {
                   </p>
                 </div>
               </div>
+
+              {/* Research Gallery Preview */}
+              {paper.images && (
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                    {paper.images.map((img, idx) => (
+                        <motion.div 
+                          key={idx}
+                          whileHover={{ scale: 1.02, y: -5 }}
+                          className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/5 bg-black/20 group/img cursor-pointer"
+                        >
+                            <img 
+                              src={img} 
+                              alt={`Research Page ${idx + 1}`} 
+                              className="w-full h-full object-cover grayscale group-hover/img:grayscale-0 transition-all duration-500" 
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-4">
+                                <span className="text-[10px] font-mono text-accent-primary uppercase tracking-widest">Page {idx + 1} Preview</span>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+              )}
               <a 
                 href={paper.url} 
                 target="_blank" 
