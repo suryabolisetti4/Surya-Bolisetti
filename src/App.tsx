@@ -636,9 +636,8 @@ const PAPERS: Paper[] = [
     title: "Regenerative Braking System: A Comprehensive Study on Energy Recovery in EVs",
     abstract: "This research presents a comprehensive study of regenerative braking technology, focusing on system architecture and performance analysis. The study demonstrates that regenerative braking can recover up to 60–70% of braking energy depending on vehicle speed and system configuration. Experimental results showed an energy recovery efficiency of 40% – 65%.",
     keywords: ["Electric Vehicles", "Energy Recovery", "Battery Storage", "Generator Mode", "Power Electronics"],
-    venue: "TECHNICAL PAPER PRESENTATION-2K26 (Integrated Report)",
-    url: "/research-paper.pdf",
-    docsUrl: "/research-paper.docx"
+    venue: "TECHNICAL PAPER PRESENTATION-2K26",
+    url: "/research-paper.pdf"
   }
 ];
 
@@ -1808,9 +1807,9 @@ function AppContent() {
       <section id="research" className="section-padding bg-bg-surface">
         <div className="content-max-width max-w-4xl">
           <SectionHeader 
-            label="// research.papers" 
-            heading="Regenerative Braking System" 
-            subtitle="A regenerative braking system (RBS) is an energy recovery mechanism that slows a vehicle by converting its kinetic energy into electrical energy, rather than wasting it as heat via traditional friction brakes. When braking, the electric motor acts as a generator, feeding power back into the battery, increasing efficiency, reducing brake wear, and extending EV range by 10-15%."
+            label="// technical.presentation" 
+            heading="Paper Presentation: RBS" 
+            subtitle="Presented at SVEC (Sri Vasavi Engineering College), this technical study explores the optimization of Regenerative Braking Systems in modern EVs. The work focuses on motor-to-generator switching logic and energy recovery efficiency, achieving up to 60-70% capture in experimental benchmarks."
           />
 
           {PAPERS.map((paper, i) => (
@@ -1862,25 +1861,42 @@ function AppContent() {
                 </div>
               </div>
 
-              {/* Research "Matter" - Content Integrated Directly on the Page */}
+              {/* Research "Matter" - Actual Content Case Study */}
               <div className="mb-8 p-8 bg-black/20 rounded-xl border border-white/5 relative group">
                 <div className="absolute -left-[3px] top-8 bottom-8 w-[3px] bg-gradient-to-b from-accent-primary to-accent-secondary opacity-50 transition-opacity group-hover:opacity-100" />
                 <h4 className="text-accent-secondary font-mono text-[10px] uppercase tracking-[0.4em] mb-6 flex items-center gap-3">
-                  <BookOpen size={14} /> Full Research Matter
+                  <BookOpen size={14} /> Technical Paper Presentation Matter
                 </h4>
-                <div className="space-y-6 text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-90 transition-opacity group-hover:opacity-100">
-                  <p>
-                    <span className="text-accent-primary font-bold mr-2">// Methodology</span> 
-                    The core objective of this study was to design an efficient energy recovery system for electric vehicles. My methodology involved re-configuring the BLDC motor control logic using an Arduino UNO. By utilizing Pulse Width Modulation (PWM) and MOSFET-based switching, the motor is seamlessly transitioned into a variable generator during braking events.
-                  </p>
-                  <p>
-                    <span className="text-accent-primary font-bold mr-2">// Energy Analysis</span> 
-                    A critical component of the "matter" involves the storage synergy between batteries and supercapacitors. The study analyzed how rapid energy surges—often lost as heat in traditional Braking—can be captured. Experimental data indicates that by using a high-speed buffer, we achieved a conversion efficiency where 40% to 65% of kinetic energy is returned to the storage unit.
-                  </p>
-                  <p>
-                    <span className="text-accent-primary font-bold mr-2">// Conclusion</span> 
-                    This implementation effectively reduces the load on the primary battery, extending the drive range by approximately 10-15% in high-frequency braking environments such as urban city cycles.
-                  </p>
+                <div className="space-y-8 text-text-muted font-mono text-[11px] leading-relaxed text-left opacity-90 transition-opacity group-hover:opacity-100">
+                  <div>
+                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Abstract</span> 
+                    Regenerative braking systems (RBS) have become a key technology in electric vehicles (EVs) for improving energy efficiency and reducing energy losses. While conventional systems dissipate kinetic energy as heat, RBS converts this energy into electrical energy for battery storage. Our study demonstrates that RBS can recover up to 60-70% of barking energy depending on vehicle speed and system configuration.
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Working Principle</span> 
+                      <ul className="space-y-1 text-[10px]">
+                        <li>1. Sensors detect deceleration via brake pedal.</li>
+                        <li>2. Motor switches from <span className="text-accent-secondary">Motor Mode</span> to <span className="text-accent-secondary">Generator Mode</span>.</li>
+                        <li>3. Rotating wheels drive the generator.</li>
+                        <li>4. Generated electrical energy is sent to battery storage.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Hardware Setup</span> 
+                      The setup consists of a BLDC Motor/Generator interface, a Rechargeable Battery pack, a Power Electronics Controller, and a dedicated Brake Control Unit. Our integration ensures variable generator control during frequent deceleration.
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-accent-primary font-bold block mb-2 font-display text-[12px] uppercase tracking-wider">// Conclusion & Future Scope</span> 
+                    Implementation of RBS significantly reduces environmental impact and improves EV sustainability. Future research focuses on AI-based braking control, integration with autonomous vehicles, and high-efficiency power electronics using supercapacitor storage synergies.
+                  </div>
+
+                  <div className="pt-4 border-t border-white/5 text-[9px] text-accent-secondary/60 italic">
+                    Dept. of EEE | Sri Vasavi Engineering College (SVEC)
+                  </div>
                 </div>
               </div>
 
@@ -1897,13 +1913,6 @@ function AppContent() {
                   className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-secondary/50 text-accent-secondary hover:bg-accent-secondary/10"
                 >
                   Save PDF <Download size={14} />
-                </a>
-                <a 
-                  href="/research-paper.docx" 
-                  download 
-                  className="btn-outline h-10 w-fit flex items-center gap-2 border-accent-primary/50 text-accent-primary hover:bg-accent-primary/10"
-                >
-                  Get Word DOCX <Download size={14} />
                 </a>
               </div>
             </motion.div>
@@ -1951,7 +1960,7 @@ function AppContent() {
         </AnimatePresence>
       </section>
 
-      {/* --- Certifications Section --- */}
+
       <section id="certifications" className="section-padding bg-bg-base">
         <div className="content-max-width">
           <SectionHeader label="// certifications.verified" heading="Certified Skills" />
