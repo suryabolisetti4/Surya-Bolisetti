@@ -1293,68 +1293,7 @@ function AppContent() {
             <Palette size={16} />
           </button>
 
-          {/* User Profile Section */}
-          <div className="relative">
-            {isAuthLoading ? (
-              <div className="w-8 h-8 rounded-full bg-bg-elevated animate-pulse" />
-            ) : user ? (
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                  className="relative w-8 h-8 rounded-full border border-accent-primary/30 overflow-hidden hover:border-accent-primary transition-colors"
-                >
-                  {profile?.photoURL ? (
-                    <img src={profile.photoURL} alt="Profile" className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-bg-elevated flex items-center justify-center">
-                      <User size={16} className="text-accent-primary" />
-                    </div>
-                  )}
-                </button>
 
-                <AnimatePresence>
-                  {isProfileDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute top-full right-0 mt-2 w-48 glass-card border border-accent-primary/20 p-2 shadow-2xl"
-                    >
-                      <div className="px-3 py-2 border-b border-accent-primary/10 mb-2">
-                        <p className="text-text-primary text-xs font-bold truncate">{profile?.username || user.displayName}</p>
-                        <p className="text-text-muted text-[10px] truncate">{user.email}</p>
-                      </div>
-                      <button className="w-full flex items-center gap-2 px-3 py-2 text-xs text-text-muted hover:text-accent-primary hover:bg-accent-primary/5 rounded transition-colors">
-                        <User size={14} /> Profile
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowSettings(true);
-                          setIsProfileDropdownOpen(false);
-                        }}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-xs text-text-muted hover:text-accent-primary hover:bg-accent-primary/5 rounded transition-colors"
-                      >
-                        <Settings size={14} /> Settings
-                      </button>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-xs text-error hover:bg-error/5 rounded transition-colors mt-1"
-                      >
-                        <LogOut size={14} /> Logout
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <button
-                onClick={handleLogin}
-                className="flex items-center gap-2 px-4 py-1.5 rounded border border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-bg-base transition-all text-[10px] font-mono tracking-widest uppercase"
-              >
-                <LogIn size={14} /> Login
-              </button>
-            )}
-          </div>
 
           <a href={IDENTITY.resumeUrl} className="btn-outline h-9 px-4 text-[11px] hidden sm:flex">
             <Download size={14} /> CV
