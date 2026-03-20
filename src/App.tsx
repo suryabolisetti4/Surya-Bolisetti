@@ -46,7 +46,8 @@ import {
   Palette,
   Sparkles,
   Wand2,
-  Maximize2
+  Maximize2,
+  LucideIcon
 } from 'lucide-react';
 import { generateProjectImage } from './services/aiService';
 import {
@@ -682,13 +683,25 @@ const CERTIFICATIONS: Certification[] = [
 
 // --- Components ---
 
-const SectionHeader = ({ label, heading, subtitle }: { label: string, heading: string, subtitle?: string }) => (
+const SectionHeader = ({ label, heading, subtitle, icon: Icon }: { label: string, heading: string, subtitle?: string, icon?: LucideIcon }) => (
   <div className="text-center mb-16">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      className="flex justify-center mb-6"
+    >
+      {Icon && (
+        <div className="w-16 h-16 rounded-2xl bg-accent-primary/5 border border-accent-primary/20 flex items-center justify-center text-accent-primary shadow-[0_0_20px_rgba(0,242,255,0.1)] group-hover:shadow-[0_0_30px_rgba(0,242,255,0.2)] transition-all">
+          <Icon size={32} />
+        </div>
+      )}
+    </motion.div>
     <motion.span
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-accent-primary font-mono text-xs tracking-[0.3em] uppercase block mb-4"
+      className="text-accent-primary font-mono text-[10px] tracking-[0.4em] uppercase block mb-4"
     >
       {label}
     </motion.span>
@@ -697,7 +710,7 @@ const SectionHeader = ({ label, heading, subtitle }: { label: string, heading: s
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.1 }}
-      className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-6"
+      className="text-3xl md:text-5xl font-display font-bold text-text-primary mb-6 uppercase tracking-wider"
     >
       {heading}
     </motion.h2>
@@ -1551,7 +1564,11 @@ function AppContent() {
       {/* --- Education Section --- */}
       <section id="education" className="section-padding bg-bg-base border-l-[3px] border-accent-secondary">
         <div className="content-max-width">
-          <SectionHeader label="// academic.history" heading="Education" />
+          <SectionHeader
+            label="// academic.timeline"
+            heading="Educational Journey"
+            icon={GraduationCap}
+          />
 
           <div className="relative max-w-3xl mx-auto">
             {/* Vertical Timeline Line */}
@@ -1642,7 +1659,7 @@ function AppContent() {
       {/* --- Skills Section --- */}
       <section id="skills" className="section-padding bg-bg-base">
         <div className="content-max-width">
-          <SectionHeader label="// skill_matrix" heading="Technical Arsenal" />
+          <SectionHeader label="// skill_matrix" heading="Technical Arsenal" icon={Terminal} />
 
           <div className="flex flex-wrap justify-center gap-3 mb-16">
             {Object.keys(skillCategories).map(cat => (
@@ -1691,10 +1708,9 @@ function AppContent() {
         </div>
       </section>
 
-      {/* --- Projects Section --- */}
       <section id="projects" className="section-padding bg-bg-surface">
         <div className="content-max-width">
-          <SectionHeader label="// projects[]" heading="What I've Built" />
+          <SectionHeader label="// projects[]" heading="What I've Built" icon={Layers} />
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {['All', 'Electronics', 'Automation', 'Smart City', 'Green Tech'].map(filter => (
@@ -1740,12 +1756,42 @@ function AppContent() {
         </AnimatePresence>
       </section>
 
-      {/* --- Research Section --- */}
+      <section id="certifications" className="section-padding bg-bg-base">
+        <div className="content-max-width">
+          <SectionHeader label="// certifications.verified" heading="Certified Skills" icon={Award} />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {CERTIFICATIONS.map((cert, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                onClick={() => cert.imageUrl && setSelectedCert(cert.imageUrl)}
+                className="glass-card p-6 flex flex-col cursor-pointer group hover:border-accent-primary/50 transition-all"
+              >
+                <div className="flex justify-between items-start mb-6">
+                  <ShieldCheck className="text-accent-primary group-hover:scale-110 transition-transform" size={32} />
+                  <span className="px-2 py-1 bg-bg-elevated rounded text-[10px] text-text-muted font-mono">{cert.date}</span>
+                </div>
+                <h3 className="font-display text-sm text-text-primary mb-2 line-clamp-2 leading-snug group-hover:text-accent-primary transition-colors">{cert.title}</h3>
+                <p className="text-accent-primary font-mono text-[11px] mb-6">Issued by {cert.issuer}</p>
+                <button className="mt-auto text-accent-secondary font-mono text-[10px] hover:underline flex items-center gap-1">
+                  View Certificate <ExternalLink size={10} />
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="research" className="section-padding bg-bg-surface">
         <div className="content-max-width max-w-4xl">
-          <SectionHeader 
-            label="// technical.report" 
-            heading="Paper Presentation: RBS" 
+          <SectionHeader
+            label="// technical.report"
+            heading="Paper Presentation: RBS"
+            icon={BookOpen}
             subtitle="Regenerative Braking Systems represent a critical frontier in EEE/EV technology, focusing on the seamless conversion of kinetic energy back into usable storage."
           />
 
@@ -1795,7 +1841,7 @@ function AppContent() {
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => paper.images && setActivePaperImages(paper.images)}
                 className="btn-outline h-10 w-fit flex items-center gap-2"
               >
@@ -1832,14 +1878,14 @@ function AppContent() {
                         transition={{ delay: idx * 0.1 }}
                         className="w-full max-w-5xl border border-white/5 shadow-2xl bg-white"
                       >
-                          <img 
-                            src={img} 
-                            alt={`Paper Page ${idx + 1}`} 
+                          <img
+                            src={img}
+                            alt={`Paper Page ${idx + 1}`}
                             className="w-full h-auto block"
                           />
                       </motion.div>
                    ))}
-                   
+
 
                 </div>
               </div>
@@ -1849,35 +1895,7 @@ function AppContent() {
       </section>
 
 
-      <section id="certifications" className="section-padding bg-bg-base">
-        <div className="content-max-width">
-          <SectionHeader label="// certifications.verified" heading="Certified Skills" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {CERTIFICATIONS.map((cert, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => cert.imageUrl && setSelectedCert(cert.imageUrl)}
-                className="glass-card p-6 flex flex-col cursor-pointer group hover:border-accent-primary/50 transition-all"
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <ShieldCheck className="text-accent-primary group-hover:scale-110 transition-transform" size={32} />
-                  <span className="px-2 py-1 bg-bg-elevated rounded text-[10px] text-text-muted font-mono">{cert.date}</span>
-                </div>
-                <h3 className="font-display text-sm text-text-primary mb-2 line-clamp-2 leading-snug group-hover:text-accent-primary transition-colors">{cert.title}</h3>
-                <p className="text-accent-primary font-mono text-[11px] mb-6">Issued by {cert.issuer}</p>
-                <button className="mt-auto text-accent-secondary font-mono text-[10px] hover:underline flex items-center gap-1">
-                  View Certificate <ExternalLink size={10} />
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* --- Contact Section --- */}
       <section id="contact" className="section-padding bg-bg-surface">
@@ -1885,6 +1903,7 @@ function AppContent() {
           <SectionHeader
             label="// open_channel()"
             heading="Get In Touch"
+            icon={Mail}
             subtitle="Whether it's a collaboration, internship, or just a chat about circuits — I'm listening."
           />
 
