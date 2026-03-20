@@ -593,14 +593,14 @@ const EDUCATION: Education[] = [
     institution: "SRI VASAVI ENGINEERING COLLEGE",
     location: "TADEPALLIGUDEM",
     period: "2021 - 2024",
-    imageUrl: "/WhatsApp Image 2026-03-18 at 3.00.57 PM.jpeg"
+    imageUrl: "/cert-diploma.jpg"
   },
   {
     degree: "SSC",
     institution: "Roots School of Essential Faculties Tanuku",
     location: "West Godavari, AP",
     period: "Completed",
-    imageUrl: "/WhatsApp Image 2026-03-18 at 3.03.13 PM.jpeg"
+    imageUrl: "/cert-ssc.jpg"
   }
 ];
 
