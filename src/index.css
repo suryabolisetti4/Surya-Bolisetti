@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron:wght@400;500;600;700;800;900&family=Syncopate:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Orbitron", sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-anton: "Anton", sans-serif;
   --font-syncopate: "Syncopate", sans-serif;
@@ -82,7 +83,7 @@
 
 @layer base {
   body {
-    @apply bg-bg-base text-text-primary font-jetbrains selection:bg-accent-primary/30 selection:text-accent-primary;
+    @apply bg-bg-base text-text-primary font-body selection:bg-accent-primary/30 selection:text-accent-primary;
     background-image: 
       linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px),
@@ -99,7 +100,7 @@
   }
 
   h1, h2, h3, h4, .font-display {
-    @apply font-jetbrains font-bold tracking-tight;
+    @apply font-display font-bold tracking-tight;
   }
 }
 
